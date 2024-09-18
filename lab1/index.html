@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab1</title>
+  </head>
+  <body>
+    <section id="task1">
+      <p id="outputName"></p>
+      <button id="btn">Дата народження</button>
+    </section>
+
+    <section id="task23" style="margin: 50px">
+      <input placeholder="x,y,z" type="text" id="inputNumber" />
+      <p>Secod part</p>
+      <input type="text" id="inputNumber2" placeholder="x,y" />
+      <label for="selectInput"
+        ><br />
+        <br /><span>Виберіть значення для z</span> <br /><select
+          name="value"
+          id="selectInput"
+        ></select>
+      </label>
+      <button id="btnInpNum">Підрахувати</button>
+    </section>
+
+    <!-- 1-5 -->
+    <script>
+      const inputNumber = document.getElementById("inputNumber");
+      const btnInpNum = document.getElementById("btnInpNum");
+      const btn = document.getElementById("btn");
+      const outputName = document.getElementById("outputName");
+      const selectInput = document.getElementById("selectInput");
+      for (let i = 0; i <= 100; i++) {
+        selectInput.insertAdjacentHTML(
+          "beforeend",
+          `<option value="${i}">${i}</option>`
+        );
+      }
+      const name = "Koval Serhii";
+      outputName.insertAdjacentText("beforeend", name);
+      btn.addEventListener("click", () => {
+        const date = new Date("2006-02-28");
+        alert(date);
+      });
+      btnInpNum.addEventListener("click", () => {
+        if (
+          inputNumber.value !== "" &&
+          inputNumber.value.split(",").length === 3
+        ) {
+          let ar2 = inputNumber.value.split(",").map((x) => Number(x));
+          let arr = inputNumber.value.split(",").map((x) => Number(x));
+          let sum = () => {
+            let sum = 0;
+            for (let i = 1; i <= 5; i++) {
+              let dj;
+              for (let j = i; j > 0; j--) {
+                dj = j;
+              }
+              sum += Math.pow(-1, i) * ((3 * arr[0] * arr[1] - 5) / dj);
+            }
+            return sum;
+          };
+          alert(
+            "Друге завдання = " +
+              Math.pow(arr[0], Math.pow(arr[1], arr[2])) +
+              2 * arr[1] * arr[2] +
+              "\n 3-тє завдання: " +
+              Math.pow(ar2[0], Math.pow(ar2[1], selectInput.value)) +
+              2 * arr[1] * selectInput.value +
+              "\n 4-тє завдання: " +
+              (arr[0] * arr[1] !== 0
+                ? 2 * arr[0] + arr[1] + " 1-ий варіант"
+                : arr[1] !== 0 || arr[0] !== 3 * arr[1]
+                ? Math.pow(arr[0], 2) + 2 * (arr[1] / arr[0]) + " 2-ий варіант"
+                : arr[0] / arr[1] + " 3-ій варіант") +
+              "\n 5-те завдання: " +
+              sum()
+          );
+        }
+      });
+    </script>
+    <!-- 6-... -->
+
+    <section id="task6" style="margin: 50px">
+      <div>
+        <input id="inputText" type="text" />
+        <ul id="suggestions"></ul>
+      </div>
+    </section>
+    <script>
+      productsName = [
+        "\"кіщачий корм\"",
+        "\"сіль\"",
+        "\"сир\"",
+        "\"сметана\"",
+        "\"салат\"",
+        "\"соус\"",
+        "\"сосиски\"",
+        "\"судочки\"",
+        "\"котлети\"",
+        "\"крабові палички\"",
+        "\"картопля\"",
+        "\"косметичка\"",
+        "\"сік\"",
+        "\"скумбрія\"",
+        "\"кран\"",
+        "\"корона\"",
+        "\"квас\"",
+        "\"кока-кола\"",
+      ];
+      let suggestions = [];
+      for (let i = 0; i < 10; i++) {
+        suggestions.push({
+          name: productsName[i],
+          id: i,
+          price: (Math.random() * 100).toFixed(2),
+          num: Math.floor(Math.random() * 100),
+        });
+      }
+      let filteredSuggestions;
+      const suggestionsList = document.getElementById("suggestions");
+      let input = document.getElementById("inputText");
+      const btnForPrice = document.createElement("button");
+      btnForPrice.textContent = "Вартість";
+ 
+      input.addEventListener("change", () => {
+        let str = "";
+        filteredSuggestions = suggestions
+          .filter((item) => item.name.replace(/"/g, "").startsWith(input.value))
+          .map((item) => {
+            str += `<li class="suggestions">
+                <span class="suggestionItem"> товар ${item.name} <br/> кількість: ${item.num}<br/> вартість: ${item.price} грн</span>
+              </li>`;
+            return item;
+          });
+
+        suggestionsList.innerHTML = str;
+        let suggestionItems = document.getElementsByClassName("suggestionItem");
+        console.log(suggestionItems);
+        Array.from(suggestionItems).forEach((item) => {
+          item.addEventListener("click", () => {
+            input.value = item.textContent.split("\"")[1];
+            const event = new Event('change');
+            input.dispatchEvent(event); 
+          });
+        });
+        suggestionsList.appendChild(btnForPrice);
+        
+
+      });
+      btnForPrice.addEventListener("click", () => {
+        let sum = 0;
+        filteredSuggestions.forEach((item) => {
+          sum += parseFloat(item.price) * item.num;
+        });
+        alert(`Total Price: ${sum.toFixed(2)} грн`);
+      });
+    </script>
+    <style>
+      .suggestions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        list-style: none;
+        background-color: gray;
+        border-radius: 10px;
+        height: 100px;
+        width: 200px;
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+  </body>
+</html>
