@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab3</title>
+  </head>
+  <body>
+    <section>
+      <h2>task1</h2>
+      <p>Enter values</p>
+      <span>height</span>
+      <input id="h" type="number" />
+      <br /><span>a</span>
+      <input id="a" type="number" />
+      <br /><span>b</span>
+      <input id="b" type="number" />
+      <br />
+      <button id="cal">calculate area</button>
+      <p id="area"></p>
+    </section>
+
+    <script>
+      let h = document.getElementById("h");
+      let a = document.getElementById("a");
+      let b = document.getElementById("b");
+      let cal = document.getElementById("cal");
+      let area = document.getElementById("cal");
+      cal.addEventListener("click", () => {
+        area.innerHTML = "area" + ((a.value + b.value) / 2) * h.value;
+      });
+    </script>
+
+    <section>
+      <h2>task2</h2>
+
+      <h2 id="line"></h2>
+      <div id="typeboard"></div>
+
+      <button id="backarr0w">backarr0w</button>
+      <button id="ctrlshift">Змінити розкаладку</button>
+    </section>
+
+    <script>
+      let rozkladka = true;
+      let symbols = "1234567890йцукенгшщзхїфівапролджєячсмитьбю ";
+      let symboleng = "1234567890qwertyuiopasdfghjklzxcvbnm ";
+      let arsym = symbols.split("");
+      let arsymeng = symboleng.split("");
+      const line = document.getElementById("line");
+      const backarr0w = document.getElementById("backarr0w");
+
+      backarr0w.addEventListener("click", () => {
+        if (line.textContent.trim() !== "") {
+          line.textContent = line.textContent.slice(0, -1);
+        }
+      });
+      const keyboard = document.getElementById("typeboard");
+
+      let change = () => {
+        keyboard.textContent = "";
+        if (rozkladka) {
+          arsym.forEach((symbol) => {
+            keyboard.insertAdjacentHTML(
+              "beforeend",
+              `<button class="key">${symbol}</button>`
+            );
+          });
+        } else {
+          arsymeng.forEach((symbol) => {
+            keyboard.insertAdjacentHTML(
+              "beforeend",
+              `<button class="key">${symbol}</button>`
+            );
+          });
+        }
+        bindKeyEvents();
+      };
+      let bindKeyEvents = () => {
+        let keys = document.getElementsByClassName("key");
+        Array.from(keys).forEach((key) => {
+          key.addEventListener("click", () => {
+            line.insertAdjacentText("beforeend", key.textContent);
+          });
+        });
+      };
+
+      change();
+
+      document.getElementById("ctrlshift").addEventListener("click", () => {
+        rozkladka = !rozkladka;
+        change();
+      });
+    </script>
+
+    <section>
+      <h2>Завдання 4</h2>
+      <image id="siteFrame" />
+      <div
+        style="width: 50%; height: 300px; background-size: cover"
+        id="image"
+      ></div>
+      <div>
+        <button id="prevBtn">Попередній</button>
+        <button id="nextBtn">Наступний</button>
+      </div>
+    </section>
+
+    <script>
+      let images = [
+        "http://kovalfrontend.000.pe/front-end_Koval/practice/IMG_2354.JPG",
+        "http://kovalfrontend.000.pe/Web-design_Koval/photos/photo_2024-02-20_18-37-26.jpg",
+        "http://kovalfrontend.000.pe/Web-design_Koval/photos/IMG_3339.JPG",
+        "http://kovalfrontend.000.pe/Web-design_Koval/photos/nuckchorris4631_friendly_Austrian_christmas_background_67ffd396-4863-4cb4-870c-659068d683c0.png",
+        "http://kovalfrontend.000.pe/Web-design_Koval/photos/photo_2023-12-26_13-47-30.jpg",
+        "http://kovalfrontend.000.pe/Web-design_Koval/photos/nuckchorris4631_friendly_Austrian_christmas_background_061e53cb-2e39-4116-8ae0-232d1b882445.png",
+        "http://kovalfrontend.000.pe/Web-design_Koval/photos/its_jiub_A_French_impressionist_style_painting_of_a_New_England_faf8c740-1d22-418f-856e-40f70a4507c5.png",
+      ];
+
+      let currentIndex = 0;
+      const frame = document.getElementById("image");
+      function updateFrame() {
+        frame.style.backgroundImage = `url(${images[currentIndex]})`;
+      }
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateFrame();
+      });
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateFrame();
+      });
+      updateFrame();
+    </script>
+
+    <section>
+      <h2>task5</h2>
+      <div id="pryklad">
+        <span style="font-size: 30px; height: 40px" id="vyraz">fsdfs</span
+        ><input
+          id="rishennia"
+          style="font-size: 30px; height: 35px"
+          type="text"
+          height="100px"
+        />
+        <button id="check" style="height: 35px; font-size: 30px">
+          Перевірити
+        </button>
+        <h2 id="stats"></h2>
+      </div>
+    </section>
+
+    <script>
+      let rishennia = document.getElementById("rishennia");
+      let vyraz = document.getElementById("vyraz");
+      let check = document.getElementById("check");
+      let stats = document.getElementById("stats");
+      let statistics = [];
+      let x1, x2, str;
+
+      let perezavantazhyty = () => {
+        x1 = Math.floor(Math.random() * 150);
+        x2 = Math.floor(Math.random() * 100);
+        str = `${x1} + ${x2}`;
+        vyraz.innerHTML = str;
+        if (statistics.length > 0) {
+          let percentage =
+            (statistics.filter((t) => t).length / statistics.length) * 100;
+          stats.innerHTML = `правильно ${Math.floor(percentage)}%`;
+        }
+      };
+      perezavantazhyty();
+
+      check.addEventListener("click", () => {
+        let correctAnswer = eval(str);
+        if (correctAnswer === Number(rishennia.value)) {
+          statistics.push(true);
+          alert("Правильно!");
+          perezavantazhyty();
+        } else {
+          statistics.push(false);
+          alert("Неправильно! Правильна відповідь: " + correctAnswer);
+        }
+      });
+    </script>
+
+    <section>
+      <h2>task 6</h2>
+      <div>
+        <button id="listCap">List1</button>
+        <ul id="ul" style="display: block">
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+          <li>gfdgfd</li>
+        </ul>
+      </div>
+    </section>
+    <script>
+      let listCap = document.getElementById("listCap");
+      let ul = document.getElementById("ul");
+      listCap.addEventListener("click", () => {
+        if (ul.style.display === "none" || ul.style.display === "") {
+          ul.style.display = "block"; // Показати список
+        } else {
+          ul.style.display = "none"; // Приховати список
+        }
+      });
+    </script>
+  </body>
+</html>
