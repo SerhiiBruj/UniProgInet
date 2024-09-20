@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lab2</title>
+  </head>
+  <body>
+    <section>
+      <h2>task1</h2>
+      <h2>Годинник</h2>
+      <h3 id="clock"></h3>
+    </section>
+    <script>
+      let clock = document.getElementById("clock");
+      let now = new Date();
+      let seconds = now.getSeconds();
+      let minutes = now.getMinutes();
+      let hours = now.getHours();
+      let date = now.getDate();
+      setInterval(() => {
+        seconds++;
+        if (seconds === 60) {
+          seconds = 0;
+          minutes++;
+        }
+        if (minutes === 60) {
+          minutes = 0;
+          hours++;
+        }
+        if (hours === 24) {
+          hours = 0;
+          date++;
+        }
+        clock.textContent = `${hours}/${minutes}/${seconds} + ${now.getFullYear()}*${
+          now.getMonth() + 1
+        }*${now.getDate()}`;
+      }, 1000);
+    </script>
+
+    <section>
+      <h2>task2</h2>
+      <h2>Калькулятор</h2>
+      <p></p>
+
+      <h2 id="line"></h2>
+      <button id="calculate">Підрахувати</button>
+      <h2>
+        <span class="num">1</span>
+        <span class="num">2</span>
+        <span class="num">3</span>
+        <span class="num">4</span>
+        <span class="num">5</span>
+        <span class="num">6</span>
+        <span class="num">7</span>
+        <span class="num">8</span>
+        <span class="num">9</span>
+      </h2>
+      <h2>
+        <span class="math"> + </span>
+        <span class="math"> - </span>
+        <span class="math"> * </span>
+        <span class="math"> / </span>
+      </h2>
+    </section>
+
+    <script>
+      let line = document.getElementById("line");
+      let nums = document.getElementsByClassName("num");
+      let symbols = document.getElementsByClassName("math");
+      let calculate = document.getElementById("calculate");
+      Array.from(nums).forEach((num) => {
+        num.addEventListener("click", () => {
+          line.insertAdjacentText("beforeend", num.textContent);
+        });
+      });
+      Array.from(symbols).forEach((num) => {
+        num.addEventListener("click", () => {
+          if (
+            !"+-*/".includes(
+              line.textContent.split(" ")[line.textContent.length - 1]
+            )
+          ) {
+            line.insertAdjacentText("beforeend", num.textContent);
+          }
+        });
+      });
+      calculate.addEventListener("click", () => {
+        let res = eval(line.textContent);
+        line.textContent = res.toFixed(2);
+      });
+    </script>
+    <section>
+      <h2>task3</h2>
+      <h2>Таблиця</h2>
+      <table>
+        <tbody id="tb"></tbody>
+      </table>
+    </section>
+
+    <script>
+      const tbody = document.getElementById("tb");
+      const arr = Array.from({ length: 6 }, (_, i) =>
+        Array.from({ length: 6 }, (_, j) => i * 10 + j)
+      );
+      let str = "";
+      for (let row of arr) {
+        str += "<tr>";
+        for (let num of row) {
+          str += `<td class="td">${num}</td>`;
+        }
+        str += "</tr>";
+      }
+
+      tbody.insertAdjacentHTML("afterbegin", str);
+      let tds = document.getElementsByClassName("td");
+      console.log(Array.from(tds));
+      Array.from(tds).forEach((td) => {
+        td.addEventListener("click", () => {
+            alert(5*(Number(Math.floor(td.textContent/10)))+3*(td.textContent%10))
+        });
+      });
+    </script>
+
+
+    <!-- 
+////////////////////////////////////
+    -->
+<script>
+   let a = 10;
+let b = 3;
+console.log("Остача від ділення", a, "на", b, "=", a % b);  
+
+let x = 15;
+let y = 5;
+console.log("Остача дорівнює 0?", x % y === 0);  
+let numbers = [1, 2, 3, 4, 5];
+console.log("Масив чисел: %d, %d, %d, %d, %d", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
+
+
+let text = "Привіт";
+console.log("Текст: %s, перше число: %d", text, numbers[0]);
+let a1 = 25;
+let b1 = 7;
+console.log("Остача від ділення", a1, "на", b1, "=", a1 % b1);
+
+console.log("Остача дорівнює нулю?", a1 % 2 === 0);
+
+
+let rre = [5, 10, 15, 20];
+console.log("Масив значень: %d, %d, %d, %d", rre[0], rre[1], rre[2], rre[3]);
+
+let message = "Значення масиву";
+console.log("%s: %d, %d", message, rre[0], rre[1]);
+
+console.table({a:'пав',b:'павпав'})
+console.group("Група 1");
+console.log("Повідомлення 1");
+console.group("Підгрупа");
+console.log("Повідомлення 2");
+console.groupEnd();
+console.groupEnd();
+
+</script>
+
+
+
+
+
+<script>
+console.info("Це інформаційне повідомлення.");
+console.warn("Це попередження.");
+console.error("Це повідомлення про помилку.");
+let obj = { name: "Serehii", age: 25, skills: ["Shower","Write code"] };
+console.dir(obj);
+let element = document.createElement("div");
+console.dirxml(element);
+console.profile("Мій профіль");
+for (let i = 0; i < 100; i++) {
+  console.log('fdsfds')
+}
+console.profileEnd("Мій профіль");
+let x2= 10;
+console.assert(x2 > 20, "x менше або дорівнює 20!");
+
+</script>
+  </body>
+</html>
