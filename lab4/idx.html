@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Example</title>
+  </head>
+  <body>
+    <section>
+      <h1>Test</h1>
+      <form action="submit" id="contForTests">
+        <button type="submit">Submit</button>
+      </form>
+      <table>
+        <tbody id="tb"></tbody>
+      </table>
+    </section>
+
+    <script>
+      let form = document.getElementById("contForTests");
+      let correctValues = [];
+      let userAnswers = [];
+
+      let generateQuestionRadio = () => {
+        let n1 = Math.floor(Math.random() * 100);
+        let n2 = Math.floor(Math.random() * 100);
+        correctValues.push(n1 + n2);
+        let str = `<div> <h2>${n1} + ${n2} = ?</h2> <div>`;
+        let correctIndex = Math.floor(Math.random() * 5);
+        for (let i = 0; i < 5; i++) {
+          if (i === correctIndex) {
+            str += `<span>${n1 + n2}</span>
+                            <input type="radio" name="q${n1}${n2}" value="${
+              n1 + n2
+            }" class="radio"> <br>`;
+          } else {
+            let randomValue = Math.floor(Math.random() * 200);
+            str += `<span>${randomValue}</span>
+                            <input type="radio" name="q${n1}${n2}" value="${randomValue}" class="radio"> <br>`;
+          }
+        }
+        str += "</div></div>";
+        form.insertAdjacentHTML("beforeend", str);
+      };
+
+      let generateQuestionSelect = () => {
+        let n1 = Math.floor(Math.random() * 100);
+        let n2 = Math.floor(Math.random() * 100);
+        correctValues.push(n1 + n2);
+        let str = `<div> <h2>${n1} + ${n2} = ?</h2> <div> <select class="select">`;
+        let correctIndex = Math.floor(Math.random() * 5);
+        for (let i = 0; i < 5; i++) {
+          if (i === correctIndex) {
+            str += `<option value="${n1 + n2}">${n1 + n2}</option>`;
+          } else {
+            let randomValue = Math.floor(Math.random() * 200);
+            str += `<option value="${randomValue}">${randomValue}</option>`;
+          }
+        }
+        str += "</select></div></div>";
+        form.insertAdjacentHTML("beforeend", str);
+      };
+
+      let generateQuestionCheckBox = () => {
+        let n1 = Math.floor(Math.random() * 100);
+        let n2 = Math.floor(Math.random() * 100);
+        correctValues.push(n1 + n2);
+        let str = `<div> <h2>${n1} + ${n2} = ?</h2> <div>`;
+        let correctIndex = Math.floor(Math.random() * 5);
+        for (let i = 0; i < 5; i++) {
+          if (i === correctIndex) {
+            str += `<span>${
+              n1 + n2
+            }</span> <input type="checkbox" class="checkbox" value="${
+              n1 + n2
+            }">`;
+          } else {
+            let randomValue = Math.floor(Math.random() * 200);
+            str += `<span>${randomValue}</span> <input type="checkbox" class="checkbox" value="${randomValue}">`;
+          }
+        }
+        str += "</div></div>";
+        form.insertAdjacentHTML("beforeend", str);
+      };
+
+      let generateQuestionInput = () => {
+        let n1 = Math.floor(Math.random() * 100);
+        let n2 = Math.floor(Math.random() * 100);
+        correctValues.push(n1 + n2);
+        let str = `<span>${n1} + ${n2} = </span><input type="number" id="inpp" /><br>`;
+        form.insertAdjacentHTML("beforeend", str);
+      };
+
+      generateQuestionRadio();
+      generateQuestionRadio();
+      generateQuestionSelect();
+      generateQuestionSelect();
+      generateQuestionCheckBox();
+      generateQuestionCheckBox();
+      generateQuestionInput();
+
+      let getCheckboxValues = () => {
+        let selectedValues = 0;
+        let count = 0;
+        let checkboxes = document.querySelectorAll(".checkbox");
+        checkboxes.forEach((checkbox, index) => {
+          if (
+            checkbox.checked &&
+            parseInt(checkbox.value) ===
+              correctValues[correctValues.length - (index + 1)]
+          ) {
+            selectedValues++;
+          }
+          if (checkbox.checked) count++;
+        });
+
+        if (count === 0) return 0;
+        if (selectedValues === count) return 4;
+        if (count - selectedValues < 2 && count > 1) return 3;
+        if (count - selectedValues < 4) return 2;
+        return 0;
+      };
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        userAnswers = [];
+
+        let radios = document.querySelectorAll(".radio");
+        radios.forEach((radio) => {
+          if (radio.checked) {
+            userAnswers.push(parseInt(radio.value));
+          }
+        });
+
+        let selects = document.querySelectorAll(".select");
+        selects.forEach((select) => {
+          userAnswers.push(parseInt(select.selectedOptions[0].value));
+        });
+
+        let checkboxScore = getCheckboxValues();
+
+        let inpp = document.getElementById("inpp");
+        if (parseInt(inpp.value) === correctValues[correctValues.length - 1]) {
+          userAnswers.push(correctValues[correctValues.length - 1]);
+        }
+
+        let score = 0;
+        userAnswers.forEach((answer, index) => {
+          if (answer === correctValues[index]) {
+            score++;
+          }
+        });
+
+        let percentage = score * 2 + checkboxScore;
+        let result = `<div>Ви отримали: ${percentage} балів</div>`;
+        form.insertAdjacentHTML("afterend", result);
+
+        let tb = document.getElementById("tb");
+        let tableRows = "";
+        correctValues.forEach((correctValue, index) => {
+          tableRows += `<tr><td>${index + 1}</td><td>${correctValue}</td></tr>`;
+        });
+        tb.innerHTML = tableRows;
+      });
+    </script>
+  </body>
+</html>

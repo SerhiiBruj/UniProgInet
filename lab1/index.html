@@ -6,8 +6,13 @@
     <title>Lab1</title>
   </head>
   <body>
-
-    <h1><a href="../index.html" style="font-size: 40px; color: inherit;color: gray;">Назад</a></h1>
+    <h1>
+      <a
+        href="../index.html"
+        style="font-size: 40px; color: inherit; color: gray"
+        >Назад</a
+      >
+    </h1>
     <section id="task1">
       <p id="outputName"></p>
       <button id="btn">Дата народження</button>
@@ -57,9 +62,7 @@
             let s = 0;
             for (let i = 1; i <= 5; i++) {
               let dj;
-              for (let j = i; j > 0; j--) {
-                dj = dj* j;
-              }
+              for (let j = i; j > 0; j--) dj = dj * j;
               s += Math.pow(-1, i) * ((3 * arr[0] * arr[1] - 5) / dj);
             }
             return s;
@@ -93,24 +96,24 @@
     </section>
     <script>
       productsName = [
-        "\"кіщачий корм\"",
-        "\"сіль\"",
-        "\"сир\"",
-        "\"сметана\"",
-        "\"салат\"",
-        "\"соус\"",
-        "\"сосиски\"",
-        "\"судочки\"",
-        "\"котлети\"",
-        "\"крабові палички\"",
-        "\"картопля\"",
-        "\"косметичка\"",
-        "\"сік\"",
-        "\"скумбрія\"",
-        "\"кран\"",
-        "\"корона\"",
-        "\"квас\"",
-        "\"кока-кола\"",
+        '"кіщачий корм"',
+        '"сіль"',
+        '"сир"',
+        '"сметана"',
+        '"салат"',
+        '"соус"',
+        '"сосиски"',
+        '"судочки"',
+        '"котлети"',
+        '"крабові палички"',
+        '"картопля"',
+        '"косметичка"',
+        '"сік"',
+        '"скумбрія"',
+        '"кран"',
+        '"корона"',
+        '"квас"',
+        '"кока-кола"',
       ];
       let suggestions = [];
       for (let i = 0; i < 10; i++) {
@@ -126,7 +129,7 @@
       let input = document.getElementById("inputText");
       const btnForPrice = document.createElement("button");
       btnForPrice.textContent = "Вартість";
- 
+
       input.addEventListener("change", () => {
         let str = "";
         filteredSuggestions = suggestions
@@ -143,14 +146,12 @@
         console.log(suggestionItems);
         Array.from(suggestionItems).forEach((item) => {
           item.addEventListener("click", () => {
-            input.value = item.textContent.split("\"")[1];
-            const event = new Event('change');
-            input.dispatchEvent(event); 
+            input.value = item.textContent.split('"')[1];
+            const event = new Event("change");
+            input.dispatchEvent(event);
           });
         });
         suggestionsList.appendChild(btnForPrice);
-        
-
       });
       btnForPrice.addEventListener("click", () => {
         let sum = 0;
