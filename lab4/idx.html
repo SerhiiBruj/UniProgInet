@@ -136,15 +136,17 @@
         selects.forEach((select) => {
           userAnswers.push(parseInt(select.selectedOptions[0].value));
         });
-
+        
+        let score = 0;
         let checkboxScore = getCheckboxValues();
 
         let inpp = document.getElementById("inpp");
         if (parseInt(inpp.value) === correctValues[correctValues.length - 1]) {
           userAnswers.push(correctValues[correctValues.length - 1]);
+          if(userAnswers[-1]===correctValues[-1])
+          score+=2
         }
 
-        let score = 0;
         userAnswers.forEach((answer, index) => {
           if (answer === correctValues[index]) {
             score++;
