@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="../index.html" style="font-size: 30px">Назад</a>
+
+
+    <section>
+        <h2>Завдання 1: Об'єкт часу</h2>
+
+<div>
+    <button id="showTime">Показати поточний час</button>
+    <p id="currentTime"></p>
+</div>
+
+<div>
+    <label>Додати секунди:</label>
+    <input type="number" id="addSecondsInput" placeholder="Кількість секунд">
+    <button id="addSecondsBtn">Додати секунди</button>
+</div>
+
+<div>
+    <label>Додати хвилини:</label>
+    <input type="number" id="addMinutesInput" placeholder="Кількість хвилин">
+    <button id="addMinutesBtn">Додати хвилини</button>
+</div>
+
+<div>
+    <label>Додати години:</label>
+    <input type="number" id="addHoursInput" placeholder="Кількість годин">
+    <button id="addHoursBtn">Додати години</button>
+</div>
+
+    </section>
+<script>
+let now = new Date();
+let time = {
+    hours: now.getHours(),
+    minutes: now.getMinutes(),
+    seconds: now.getSeconds(),
+    date: now.getDate(),
+    month: now.getMonth(), 
+    year: now.getFullYear(),
+};
+
+function showCurrentTime() {
+    let hours = String(time.hours).padStart(2, '0');
+    let minutes = String(time.minutes).padStart(2, '0');
+    let seconds = String(time.seconds).padStart(2, '0');
+    let day = String(time.date).padStart(2, '0');
+    let month = String(time.month + 1).padStart(2, '0'); 
+    let year = time.year;
+
+    document.getElementById('currentTime').innerText = `Поточний час: ${hours}:${minutes}:${seconds}, Дата: ${day}.${month}.${year}`;
+}
+function addSeconds() {
+    let secondsToAdd = parseInt(document.getElementById('addSecondsInput').value);
+    now.setSeconds(now.getSeconds() + secondsToAdd); 
+    updateTime();
+    showCurrentTime();
+}
+
+function addMinutes() {
+    let minutesToAdd = parseInt(document.getElementById('addMinutesInput').value);
+    now.setMinutes(now.getMinutes() + minutesToAdd); 
+    updateTime();
+    showCurrentTime();
+}
+
+function addHours() {
+    let hoursToAdd = parseInt(document.getElementById('addHoursInput').value);
+    now.setHours(now.getHours() + hoursToAdd); 
+    updateTime();
+    showCurrentTime();
+}
+
+function updateTime() {
+    time.hours = now.getHours();
+    time.minutes = now.getMinutes();
+    time.seconds = now.getSeconds();
+    time.date = now.getDate();
+    time.month = now.getMonth(); 
+    time.year = now.getFullYear();
+}
+
+document.getElementById('showTime').addEventListener('click', showCurrentTime);
+document.getElementById('addSecondsBtn').addEventListener('click', addSeconds);
+document.getElementById('addMinutesBtn').addEventListener('click', addMinutes);
+document.getElementById('addHoursBtn').addEventListener('click', addHours);
+
+showCurrentTime();
+
+</script>
+
+<section>
+
+    <h2>Завдання 2: Робота з датами</h2>
+<!-- 2 -->
+<div>
+    <h3>Завдання 2.1. Виведення поточної дати, дня тижня і часу</h3>
+    <button id="showDateTime">Виконати</button>
+    <p id="currentDateTime"></p>
+</div>
+
+<!-- Завдання 2.2 -->
+<div>
+    <h3>Завдання 2.2. Виведення дня і номера тижня</h3>
+    <button id="showDayInfo">Виконати</button>
+    <p id="dayInfo"></p>
+</div>
+
+<!-- Завдання 2.3 -->
+<div>
+    <h3>Завдання 2.3. Знайти дату N днів назад чи вперед</h3>
+    <label>Введіть кількість днів:</label>
+    <input type="number" id="daysInput">
+    <button id="findDateBtn">Знайти дату</button>
+    <p id="dateResult"></p>
+</div>
+
+</section>
+<script>
+    // 2.1 Функція для виведення поточної дати, дня тижня і часу
+function showDateTime() {
+    const now = new Date();
+    const daysOfWeek = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', 'п’ятниця', 'субота'];
+    
+    const dayName = daysOfWeek[now.getDay()];
+    const date = now.getDate();
+    const month = now.toLocaleString('uk-UA', { month: 'long' });
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    document.getElementById('currentDateTime').innerText = `Дата: ${date} ${month} ${year} року\nДень тижня: ${dayName}\nЧас: ${hours}:${minutes}`;
+}
+
+// 2.2 Функція, яка приймає об'єкт Date і повертає інформацію про день тижня
+function showDayInfo() {
+    const now = new Date();
+    const daysOfWeek = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', 'п’ятниця', 'субота'];
+    
+    const dayNumber = now.getDay() === 0 ? 7 : now.getDay(); // Перетворюємо неділю на 7
+    const dayName = daysOfWeek[now.getDay()];
+    
+    document.getElementById('dayInfo').innerText = `Номер тижня: ${dayNumber}\nНазва дня тижня: ${dayName}`;
+}
+
+// 2.3 Функція для знаходження дати N днів назад чи вперед
+function findDate() {
+    const days = parseInt(document.getElementById('daysInput').value);
+    const now = new Date();
+    now.setDate(now.getDate() + days);
+    
+    const date = now.getDate();
+    const month = now.getMonth() + 1; // Місяці починаються з 0
+    const year = now.getFullYear();
+    
+    document.getElementById('dateResult').innerText = `Нова дата: ${date}.${month}.${year}`;
+}
+
+// Прив'язуємо події до кнопок
+document.getElementById('showDateTime').addEventListener('click', showDateTime);
+document.getElementById('showDayInfo').addEventListener('click', showDayInfo);
+document.getElementById('findDateBtn').addEventListener('click', findDate);
+
+</script>
+</body>
+</html>

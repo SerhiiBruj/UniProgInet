@@ -10,6 +10,17 @@
       <h1>Test</h1>
       <form action="submit" id="contForTests">
         <button type="submit">Submit</button>
+        <div>
+          <h1>Втберіть мови програмування</h1>
+          <input type="checkbox" class="langs" name="langs" value="JS" />
+          <span>JS</span>
+          <input type="checkbox" class="langs" name="langs" value="HTML" />
+          <span>HTML</span>
+          <input type="checkbox" class="langs" name="langs" value="CSS" />
+          <span>CSS</span>
+          <input type="checkbox" class="langs" name="langs" value="C++" />
+          <span>C++</span>
+        </div>
       </form>
       <table>
         <tbody id="tb"></tbody>
@@ -20,6 +31,7 @@
       let form = document.getElementById("contForTests");
       let correctValues = [];
       let userAnswers = [];
+      let no = 0;
 
       let generateQuestionRadio = () => {
         let n1 = Math.floor(Math.random() * 100);
@@ -65,19 +77,12 @@
         let n1 = Math.floor(Math.random() * 100);
         let n2 = Math.floor(Math.random() * 100);
         correctValues.push(n1 + n2);
-        let str = `<div> <h2>${n1} + ${n2} = ?</h2> <div>`;
-        let correctIndex = Math.floor(Math.random() * 5);
+
+        let str = `<div> <h2>${n1} + ${n2} >= ?</h2> <div>`;
+        let correctAnswer = n1 + n2;
         for (let i = 0; i < 5; i++) {
-          if (i === correctIndex) {
-            str += `<span>${
-              n1 + n2
-            }</span> <input type="checkbox" class="checkbox" value="${
-              n1 + n2
-            }">`;
-          } else {
-            let randomValue = Math.floor(Math.random() * 200);
-            str += `<span>${randomValue}</span> <input type="checkbox" class="checkbox" value="${randomValue}">`;
-          }
+          let randomValue = Math.floor(Math.random() * 200);
+          str += `<span>${randomValue}</span> <input type="checkbox" class="checkbox" value="${randomValue}"> <br>`;
         }
         str += "</div></div>";
         form.insertAdjacentHTML("beforeend", str);
@@ -101,29 +106,45 @@
 
       let getCheckboxValues = () => {
         let selectedValues = 0;
-        let count = 0;
         let checkboxes = document.querySelectorAll(".checkbox");
-        checkboxes.forEach((checkbox, index) => {
-          if (
-            checkbox.checked &&
-            parseInt(checkbox.value) ===
-              correctValues[correctValues.length - (index + 1)]
-          ) {
+        let correctCount = 0;
+
+        checkboxes.forEach((checkbox) => {
+          if (checkbox.checked) {
             selectedValues++;
+            if (
+              parseInt(checkbox.value) >=
+              correctValues[correctValues.length - 1]
+            ) {
+              correctCount++;
+            }
           }
-          if (checkbox.checked) count++;
         });
 
-        if (count === 0) return 0;
-        if (selectedValues === count) return 4;
-        if (count - selectedValues < 2 && count > 1) return 3;
-        if (count - selectedValues < 4) return 2;
+        if (selectedValues === 0) return 0;
+        if (correctCount === selectedValues) return 4;
+        if (correctCount < selectedValues) return 2;
         return 0;
       };
+
+     
+      let inps = document.getElementsByClassName("langs");
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         userAnswers = [];
+
+        let inpsCor = 0,
+        count = 0;
+        Array.from(inps).forEach((inp) => {
+          if (inp.checked) {
+            count++;
+            console.log(count)
+            if (inp.value === "JS" || inp.value === "C++") {
+              inpsCor++;
+            }
+          }
+        });
 
         let radios = document.querySelectorAll(".radio");
         radios.forEach((radio) => {
@@ -136,15 +157,14 @@
         selects.forEach((select) => {
           userAnswers.push(parseInt(select.selectedOptions[0].value));
         });
-        
+
         let score = 0;
         let checkboxScore = getCheckboxValues();
 
         let inpp = document.getElementById("inpp");
         if (parseInt(inpp.value) === correctValues[correctValues.length - 1]) {
           userAnswers.push(correctValues[correctValues.length - 1]);
-          if(userAnswers[-1]===correctValues[-1])
-          score+=2
+          score += 2;
         }
 
         userAnswers.forEach((answer, index) => {
@@ -152,15 +172,17 @@
             score++;
           }
         });
+        let sc = Math.floor(inpsCor/count*2);
+        
 
-        let percentage = score * 2 + checkboxScore;
+        let percentage = score + checkboxScore + sc;
         let result = `<div>Ви отримали: ${percentage} балів</div>`;
         form.insertAdjacentHTML("afterend", result);
 
         let tb = document.getElementById("tb");
-        let tableRows = "";
+        let tableRows = `<tr><td>${+1}</td><td> JS C++ </td></tr>`;
         correctValues.forEach((correctValue, index) => {
-          tableRows += `<tr><td>${index + 1}</td><td>${correctValue}</td></tr>`;
+          tableRows += `<tr><td>${index + 2}</td><td>${correctValue}</td></tr>`;
         });
         tb.innerHTML = tableRows;
       });

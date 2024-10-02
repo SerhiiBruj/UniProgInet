@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+      .error {
+        border: 2px solid red;
+      }
+
+      .success {
+        border: 2px solid green;
+      }
+
+      .error-message {
+        color: red;
+        display: none;
+      }
+
+      .success-icon {
+        color: green;
+        display: none;
+      }
+
+      .show {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../index.html" style="font-size: 30px">Назад</a>
+
+    <form id="registrationForm">
+      <label for="email">E-mail:</label>
+      <input type="text" id="email" name="email" />
+      <span class="error-message" id="emailError"
+        >Невірний e-mail, повинен містити @pnu.edu.ua</span
+      >
+      <br /><br />
+
+      <label for="name">Ім’я та прізвище:</label>
+      <input type="text" id="name" name="name" />
+      <span class="error-message" id="nameError"
+        >Невірний формат: Ім'я з великої букви, прізвище великими літерами</span
+      >
+      <br /><br />
+
+      <label for="login">Логін:</label>
+      <input type="text" id="login" name="login" />
+      <span class="error-message" id="loginError"
+        >Логін повинен містити тільки латинські букви</span
+      >
+      <br /><br />
+
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password" />
+      <span class="error-message" id="passwordError"
+        >Пароль має містити мінімум 8 символів, 1 букву, 1 цифру і 1 спецсимвол
+        (_-!@#$%^&*)</span
+      >
+      <br /><br />
+
+      <label for="postcode">Поштовий індекс:</label>
+      <input type="text" id="postcode" name="postcode" />
+      <span class="error-message" id="postcodeError"
+        >Індекс повинен складатися з 5 цифр</span
+      >
+      <br /><br />
+
+      <button type="button" id="submitBtn">Перевірити</button>
+    </form>
+
+    <script>
+      // Функція для перевірки e-mail
+        function validateEmail(email) {
+          const emailPattern1 = /^[a-z0-9._%+-]+@pnu\.edu\.ua$/i;
+          const emailPattern2 = /^[a-z0-9._%+-]+@gmail\.com$/i;
+
+          return emailPattern1.test(email) || emailPattern2.test(email);
+        }
+
+      // Функція для перевірки імені та прізвища
+      function validateName(name) {
+        const namePattern = /^[A-ZА-ЯЇІЄҐ][a-zа-яїієґ]+ [A-ZА-ЯЇІЄҐ]+$/;
+        return namePattern.test(name);
+      }
+
+      // Функція для перевірки логіна
+      function validateLogin(login) {
+        const loginPattern = /^[a-zA-Z]+$/;
+        return loginPattern.test(login);
+      }
+
+      // Функція для перевірки пароля
+      function validatePassword(password) {
+        const passwordPattern =
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_\-!@#$%^&*]).{8,}$/;
+        return passwordPattern.test(password);
+      }
+
+      // Функція для перевірки поштового індексу
+      function validatePostcode(postcode) {
+        const postcodePattern = /^\d{5}$/;
+        return postcodePattern.test(postcode);
+      }
+
+      // Основна функція перевірки форми
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", function () {
+          let email = document.getElementById("email").value;
+          let name = document.getElementById("name").value;
+          let login = document.getElementById("login").value;
+          let password = document.getElementById("password").value;
+          let postcode = document.getElementById("postcode").value;
+
+          // Очищення помилок
+          document
+            .querySelectorAll(".error-message")
+            .forEach((el) => el.classList.remove("show"));
+          document
+            .querySelectorAll("input")
+            .forEach((el) => el.classList.remove("error"));
+          document
+            .querySelectorAll("input")
+            .forEach((el) => el.classList.remove("success"));
+
+          let isValid = true;
+
+          // Перевірка e-mail
+          if (!validateEmail(email)) {
+            document.getElementById("emailError").classList.add("show");
+            document.getElementById("email").classList.add("error");
+            isValid = false;
+          } else {
+            document.getElementById("email").classList.add("success");
+          }
+
+          // Перевірка імені та прізвища
+          if (!validateName(name)) {
+            document.getElementById("nameError").classList.add("show");
+            document.getElementById("name").classList.add("error");
+            isValid = false;
+          } else {
+            document.getElementById("name").classList.add("success");
+          }
+
+          // Перевірка логіна
+          if (!validateLogin(login)) {
+            document.getElementById("loginError").classList.add("show");
+            document.getElementById("login").classList.add("error");
+            isValid = false;
+          } else {
+            document.getElementById("login").classList.add("success");
+          }
+
+          // Перевірка пароля
+          if (!validatePassword(password)) {
+            document.getElementById("passwordError").classList.add("show");
+            document.getElementById("password").classList.add("error");
+            isValid = false;
+          } else {
+            document.getElementById("password").classList.add("success");
+          }
+
+          // Перевірка поштового індексу
+          if (!validatePostcode(postcode)) {
+            document.getElementById("postcodeError").classList.add("show");
+            document.getElementById("postcode").classList.add("error");
+            isValid = false;
+          } else {
+            document.getElementById("postcode").classList.add("success");
+          }
+
+          if (isValid) {
+            alert("Форма заповнена вірно!");
+          }
+        });
+    </script>
+  </body>
+</html>
