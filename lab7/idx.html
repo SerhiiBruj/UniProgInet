@@ -119,9 +119,10 @@ function reverseSequence() {
 
 function noZeros() {
     let input = document.getElementById('noZerosInput').value;
-    let numbers = input.split(' ').map(Number).filter(n => n !== 0).join(' ');
+    let numbers = input.split('').filter(n => n !== "0").join(' ');
     document.getElementById('noZerosResult').innerText = numbers;
 }
+
 
 function reverser() {
     let input = document.getElementById('reverserInput').value;

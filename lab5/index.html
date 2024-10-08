@@ -14,7 +14,7 @@
           <div id="view">view</div>
           <div class="viewContext" id="viewContextView">
             <div> view 1</div>
-            <div id="view3" > <div>>view 2</div><div id="dd" > view 2.1</div></div>
+            <div id="view3"  style="flex-direction: column;"> <div>>view 2</div><div id="dd" style="display: flex; justify-content: flex-end;" > <div>view 2.1</div></div></div>
           </div>
         </div>
         <div class="tap">
@@ -197,15 +197,20 @@
       ul.tabs {
         margin: 0;
         padding: 0;
+
       }
 
       ul.tabs li {
         list-style: none;
-        display: inline;
+        display: inline-block;
+
       }
 
       ul.tabs li a {
+
+        background-image: url("https://pixabay.com/get/g754686fbf87defe6ae2ba21154991f1135e3f9b491a1724d12b21231d42be5e4e89fef983d6e07e5ee8414cc6183429f5df09e730980126cb4de166f163483e5_1280.jpg");
         background-color: #464c54;
+        background-size: cover;
         color: #ffebb5;
         padding: 8px 14px;
         text-decoration: none;
@@ -221,8 +226,11 @@
       }
 
       ul.tabs li a.active {
+        transition: all ease 1s;
+        transform: scale(1.5);
+        transform-origin: bottom;
+        position: relative;
         background-color: #ffffff;
-        color: #282e32;
         border: 1px solid #464c54;
         border-bottom: 1px solid #ffffff;
       }
@@ -273,11 +281,20 @@
 
         // Забираємо активність зі всіх вкладок
         document.getElementById("tab_1").className = "";
+        document.getElementById("tab_1").parentNode.style.transform="scale(1) translateX(-40px)";
+        
         document.getElementById("tab_2").className = "";
+        document.getElementById("tab_2").parentNode.style.transform="scale(1)";
+        document.getElementById("tab_1").parentNode.style.transform="scale(1) translateX(-40px)";
+        document.getElementById("tab_3").parentNode.style.transform="scale(1) translateX(40px)";
+        
         document.getElementById("tab_3").className = "";
+        document.getElementById("tab_3").parentNode.style.transform="scale(1)";
+        document.getElementById("tab_3").parentNode.style.transform="scale(1) translateX(40px)";
 
         // Додаємо клас active до активної вкладки
         document.getElementById(new_tab).className = "active";
+        document.getElementById(new_tab).parentNode.style.transform="scale(1.5)";
       }
     </script>
   </body>

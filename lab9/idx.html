@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: rgb(51, 51, 51);
+
+        overflow-x: hidden;
+      }
+      * {
+        color: rgb(47, 9, 9);
+      }
+      .cc {
+        transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+        background-color: rgb(47, 9, 9);
+      }
+      .cc:hover {
+        background-color: rgb(94, 94, 45);
+        transform: scale(1.2);
+        box-shadow: 10px 10px 12px rgb(47, 9, 9);
+        color: rgb(47, 9, 9);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../index.html" style="font-size: 30px">Назад</a>
+
+    <section>
+      <h1>JS анімаціїї у попередніх лабораторних</h1>
+      <a
+        href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/playy.html"
+        style="font-size: 30px"
+        ><div
+          class="cc"
+          style="
+            width: 40px;
+            border-radius: 50%;
+            height: 40px;
+            text-decoration: underline;
+            text-align: center;
+            color: rgb(51, 51, 51);
+          "
+        >
+          1
+        </div></a
+      >
+      <br />
+      <a
+        href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/ng.html#a4"
+        style="font-size: 30px"
+        ><div
+          class="cc"
+          style="
+            width: 40px;
+            border-radius: 50%;
+            height: 40px;
+            text-decoration: underline;
+            text-align: center;
+            color: rgb(51, 51, 51);
+          "
+        >
+          2
+        </div>
+      </a>
+    </section>
+
+    <section style="height: 270px">
+      <h1>Решта JS анімацій</h1>
+      <h3>text typing</h3>
+      <div
+        style="
+          background-color: rgb(98, 98, 98);
+          text-wrap: pretty;
+          width: 150px;
+          padding: 15px;
+          border-radius: 10px;
+        "
+        id="textTyping"
+      ></div>
+    </section>
+    <script>
+      let textTyping = document.getElementById("textTyping");
+      const strs = [
+        "Під час навчання можна ",
+        "зловити шизу ",
+        "знайти друзів. ",
+        "Добре що вон",
+        "а   ",
+        "и у мене були і раніше",
+      ];
+      (async () => {
+        await recTypeIn(textTyping, strs[0].split(""), 0);
+        await recTypeIn(textTyping, strs[1].split(""), 0);
+        await recRemove(textTyping, strs[1].split(""), 0);
+        await recTypeIn(textTyping, strs[2].split(""), 0);
+        await recTypeIn(textTyping, strs[3].split(""), 0);
+        await recTypeIn(textTyping, strs[4].split(""), 0);
+        await recRemove(textTyping, strs[4].split(""), 0);
+        await recTypeIn(textTyping, strs[5].split(""), 0);
+      })();
+
+      function recTypeIn(el, chars, idx) {
+        return new Promise((resolve) => {
+          if (idx < chars.length) {
+            setTimeout(() => {
+              el.insertAdjacentText("beforeend", chars[idx]);
+              recTypeIn(el, chars, idx + 1).then(resolve); // Рекурсивний виклик функції
+            }, 100);
+          } else {
+            resolve();
+          }
+        });
+      }
+
+      function recRemove(el, chars, idx) {
+        return new Promise((resolve) => {
+          if (idx < chars.length) {
+            setTimeout(() => {
+              removeLastCharacter(el);
+              recRemove(el, chars, idx + 1).then(resolve);
+            }, 100);
+          } else {
+            resolve();
+          }
+        });
+      }
+
+      function removeLastCharacter(element) {
+        const text = element.textContent;
+        element.textContent = text.slice(0, -1);
+      }
+    </script>
+    <style>
+      #logo {
+        transform: scale(0) translateY(-2000px);
+      }
+    </style>
+    <section id="dd" style="height: 580px">
+      <h2>LOGO</h2>
+      <div
+        id="logo"
+        style="
+          width: fit-content;
+          height: fit-content;
+          transition: transform ease 0.5s;
+          position: absolute;
+        "
+      >
+        <object data="./LOGO.svg" type="image/svg+xml"></object>
+      </div>
+    </section>
+
+    <script>
+      let logo = document.getElementById("logo");
+      let dd = document.getElementById("dd");
+
+      let observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!logo.dataset.animating) {
+              logo.dataset.animating = true;
+              beAWheel(logo, 1000);
+            }
+          } else {
+            logo.dataset.animating = false;
+          }
+        });
+      });
+
+      observer.observe(dd);
+
+      let devl = (wheel) => {
+  wheel.style.transition = "all ease-in 1s"; 
+  
+  wheel.style.transform = "translateX(100vw) rotate(360deg)"; 
+
+  setTimeout(() => {
+    wheel.style.transition = "transform ease-in 1s"; 
+    wheel.style.transform = "translateX(0) rotate(-360deg)"; 
+  }, 1000);
+};
+
+
+      let beAWheel = (wheel, t) => {
+        if (t > 1) {
+          wheel.style.transform = `scale(0.5) translateY(-${t * 5}px)`;
+          setTimeout(() => {
+            wheel.style.transform = `scale(1) translateY(0px)`;
+            setTimeout(() => {
+              beAWheel(wheel, t / 2);
+            }, t);
+          }, t / 2);
+        } else {
+          wheel.style.transform = `scale(1) translateY(0)`;
+          wheel.dataset.animating = false;
+          devl(logo);
+        }
+      };
+    </script>
+  </body>
+</html>
+
+<!-- <script>
+      //   let str =
+      //     "fds dsafadsadsafr fa FA sdasd fA sadsads\nfdfa fa fdfag Lol fa";
+      //   console.log(Array.from(str.matchAll(/fa/gi)));
+      //   console.log(str.search(/fa/gi));
+      //   console.log(str.replace(/fa|fds/gi, "AMERICA"));
+
+      console.log("////////////////");
+      const regex = /\d[^a-z][^а-я]/g;
+      console.log(regex.test("1фвds"));
+      const rege = /\d+[^a-z]*ds[^ая]{1,3}$/gi;
+      console.log(rege.test("2 фівфі dsdd "));
+      console.log("////////////////");
+      const reg = /ab*c/;
+      console.log(reg.test("ac")); // true
+      console.log(reg.test("abc")); // true
+      console.log(reg.test("abbbc")); // true
+      console.log(reg.test("abdc")); // false
+
+console.log('////////////////////////')
+      let ss= /world*.*test/s;
+
+      console.log(ss.test("world needs a hero. to be tested"))
+    </script> -->
