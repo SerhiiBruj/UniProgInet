@@ -18,10 +18,9 @@
         background-color: rgb(47, 9, 9);
       }
       .cc:hover {
-        background-color: rgb(94, 94, 45);
         transform: scale(1.2);
+        background-color: rgb(94, 94, 45);
         box-shadow: 10px 10px 12px rgb(47, 9, 9);
-        color: rgb(47, 9, 9);
       }
     </style>
   </head>
@@ -30,43 +29,67 @@
 
     <section>
       <h1>JS анімаціїї у попередніх лабораторних</h1>
-      <a
-        href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/playy.html"
-        style="font-size: 30px"
-        ><div
-          class="cc"
-          style="
-            width: 40px;
-            border-radius: 50%;
-            height: 40px;
-            text-decoration: underline;
-            text-align: center;
-            color: rgb(51, 51, 51);
-          "
+      <div
+        class="cc pulse"
+        id="a1"
+        style="
+          width: 40px;
+          border-radius: 50%;
+          height: 40px;
+          text-decoration: underline;
+          text-align: center;
+        "
+      >
+        <a
+          href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/playy.html"
+          style="font-size: 30px; color: rgb(51, 51, 51)"
         >
           1
-        </div></a
+        </a>
+      </div>
+      <div
+        class="cc"
+        id="a2"
+        style="
+          width: 40px;
+          border-radius: 50%;
+          height: 40px;
+          text-decoration: underline;
+          text-align: center;
+          color: rgb(51, 51, 51);
+        "
       >
-      <br />
-      <a
-        href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/ng.html#a4"
-        style="font-size: 30px"
-        ><div
-          class="cc"
-          style="
-            width: 40px;
-            border-radius: 50%;
-            height: 40px;
-            text-decoration: underline;
-            text-align: center;
-            color: rgb(51, 51, 51);
-          "
+        <a
+          href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/ng.html#a4"
+          style="font-size: 30px; color: rgb(51, 51, 51)"
         >
           2
-        </div>
-      </a>
+        </a>
+      </div>
     </section>
-
+    <script>
+      let a1 = document.getElementById("a1");
+      let a2 = document.getElementById("a2");
+      a2.addEventListener("mouseenter", () => {
+        pulse(a2);
+      });
+      a1.addEventListener("mouseenter", () => {
+       a1.style.transform="rotate(360deg)"
+      });
+      
+      function pulse(a) {
+        setInterval(() => {
+          a.style.transform = "scale(1.2)";
+          a.style.boxShadow = "10px 10px 12px rgb(47, 9, 9)";
+        }, 500);
+        setTimeout(() => {
+          setInterval(() => {
+            a.style.transform = "scale(1)";
+            a.style.boxShadow = "none";
+          }, 400);
+        }, 200);
+      }
+    </script>
     <section style="height: 270px">
       <h1>Решта JS анімацій</h1>
       <h3>text typing</h3>
@@ -85,11 +108,11 @@
       let textTyping = document.getElementById("textTyping");
       const strs = [
         "Під час навчання можна ",
-        "зловити шизу ",
+        "зловити шизу  ",
         "знайти друзів. ",
         "Добре що вон",
         "а   ",
-        "и у мене були і раніше",
+        "и у мене були і раніше <3 😺",
       ];
       (async () => {
         await recTypeIn(textTyping, strs[0].split(""), 0);
@@ -173,16 +196,15 @@
       observer.observe(dd);
 
       let devl = (wheel) => {
-  wheel.style.transition = "all ease-in 1s"; 
-  
-  wheel.style.transform = "translateX(100vw) rotate(360deg)"; 
+        wheel.style.transition = "all ease-in 1s";
 
-  setTimeout(() => {
-    wheel.style.transition = "transform ease-in 1s"; 
-    wheel.style.transform = "translateX(0) rotate(-360deg)"; 
-  }, 1000);
-};
+        wheel.style.transform = "translateX(100vw) rotate(360deg)";
 
+        setTimeout(() => {
+          wheel.style.transition = "transform ease-in 1s";
+          wheel.style.transform = "translateX(0) rotate(-360deg)";
+        }, 1000);
+      };
 
       let beAWheel = (wheel, t) => {
         if (t > 1) {
