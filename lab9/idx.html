@@ -26,9 +26,11 @@
   </head>
   <body>
     <a href="../index.html" style="font-size: 30px">Назад</a>
-    
+
     <section>
-      <h1 style="font-size: 35px;">JS анімаціїї у попередніх лабораторних роботах</h1>
+      <h1 style="font-size: 35px">
+        JS анімаціїї у попередніх лабораторних роботах
+      </h1>
       <h1>10-а робота з дисципліни "Фронт-енд розробкв"</h1>
       <div
         class="cc pulse"
@@ -213,96 +215,37 @@
         element.textContent = text.slice(0, -1);
       }
     </script>
-    <style>
-      #logo {
-        transform: scale(0) translateY(-2000px);
-      }
-    </style>
-    <section id="dd" style="height: 580px">
-      <h2 id="ipz">LOGO</h2>
-      <div
-        id="logo"
-        style="
-          width: fit-content;
-          height: 200px;
-          transition: transform ease 0.5s;
-          position: absolute;
-        "
-      >
+
+    <section id="dddd" style="height: 580px">
+      <h2 id="z">LOGO</h2>
+      <div id="myattempt">
         <object data="./LOGO.svg" type="image/svg+xml"></object>
       </div>
     </section>
-
     <script>
-      let logo = document.getElementById("logo");
-      let dd = document.getElementById("dd");
+      let myattempt = document.getElementById("myattempt");
+      myattempt.addEventListener("click", () => {
+        console.log("555");
+        myattempt.style.transform = `none`; 
+        ballbounce(myattempt, 5000);
+      });
 
-      function bounceBall() {
-        logo.animate(
-          [
-            { transform: "translateY(0px)" },
-            { transform: "translateY(300px) scale(0.5)" },
-            { transform: "translateY(0px)" },
-          ],
-          {
-            duration: 2000,
-            iterations: 2,
-            easing: "ease-in-out",
-          }
-        );
-      }
-
-      bounceBall();
-      setTimeout(() => {
-        logo.style.transform = "none";
-      }, 2000);
-
-      // let observer = new IntersectionObserver((entries) => {
-      //   entries.forEach((entry) => {
-      //     if (entry.isIntersecting) {
-      //       if (!logo.dataset.animating) {
-      //         logo.dataset.animating = true;
-      //         beAWheel(logo, 1000);
-      //       }
-      //     } else {
-      //       logo.dataset.animating = false;
-      //     }
-      //   });
-      // });
-
-      // observer.observe(dd);
-      // let ipz = document.getElementById("ipz");
-      // let devl = (wheel) => {
-      //   wheel.style.transition = "all ease-in 1s";
-
-      //   wheel.style.transform = "translateX(100vw) rotate(360deg)";
-
-      //   setTimeout(() => {
-      //     wheel.style.transition = "transform ease-in 1s";
-      //     wheel.style.transform = "translateX(0) rotate(-360deg)";
-      //     setTimeout(()=>{
-      //       ipz.textContent=''
-      //       ipz.insertAdjacentHTML("beforeend","Поступай на ІПЗ </br> Тут вчать професіонально")
-      //     },1000)
-      //   }, 1000);
-      // };
-
-      // let beAWheel = (wheel, t) => {
-      //   if (t > 1) {
-      //     wheel.style.transform = `scale(0.5) translateY(-${t * 5}px)`;
-      //     setTimeout(() => {
-      //       wheel.style.transform = `scale(1) translateY(0px)`;
-
-      //     }, t / 2);
-      //     setTimeout(() => {
-      //         beAWheel(wheel, t / 2);
-      //       }, t );
-      //   } else {
-      //     wheel.style.transform = `scale(1) translateY(0)`;
-      //     wheel.dataset.animating = false;
-      //     devl(logo);
-      //   }
-      // };
+      const ballbounce = (el, time) => {
+        el.animate([
+          
+            { transform: "translateY(0)" },
+            { transform: `translateY(-${time/10}px)` },
+            { transform: "translateY(0)" },
+        ],{
+            duration: time,
+            easing: "cubic-bezier(0, 1, 1, 0)",
+        })
+        if (time > 100) {
+          setTimeout(() => {
+            ballbounce(el,time/2)
+          }, time );
+        }
+      };
     </script>
   </body>
 </html>
