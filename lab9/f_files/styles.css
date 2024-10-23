@@ -1,0 +1,461 @@
+
+.prebox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .box{
+    width: fit-content;
+  }
+  .nav{
+    position: fixed;
+    top: 0px;
+display: flex;
+justify-content: space-between;
+width: 100%;
+    z-index: 2;
+    align-items: center;
+    background-color: #2b2b2b;
+    height: 80px;
+  }
+  .nav div{
+    width: 30%;
+    display: flex;
+justify-content: space-evenly;
+align-items: center;
+  }
+  .comp{
+    width:433px; height:281px;
+  }
+  .Christmas{
+    height: 700px; width: 1400px;transform: scale(0.6); border-radius: 25px; position: relative; transform-origin: left top;
+    }.obmin{
+    height: 700px; width: 1400px;transform: scale(0.5); border-radius: 25px; position: relative; transform-origin: left top;
+    }
+  body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: #2b2b2b;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    margin-top: 80px;
+}
+
+.box {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    width: 40%;
+    backdrop-filter: blur(2px); padding-right: 100px;padding-bottom: 50px;padding-left: 50px;padding-top: 50px; border-radius: 20px; background-color: #252525d9; font-size: 25px;
+   overflow: hidden;
+}
+.teammate div{
+  position: relative; left: 20px;  height: fit-content; border-radius: 50%; width: fit-content;padding: 50px; background-image:url(./photos/a.webp); background-position: center;background-size: cover;
+}
+.teammate div:nth-child(2){background-image: url(./photos/i.webp);}
+.teammate div:nth-child(2){background-image: url(./photos/i.webp);}
+img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.lul{
+  display: none;
+}
+.grid-container {
+  position: absolute;
+  z-index: 0;
+
+  
+
+  top: 79px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px;
+  width: 90vw; 
+  grid-auto-rows: 150px; 
+  grid-auto-columns:150px;
+  height: fit-content;
+  padding: 20px;
+  background-color: #1e1e1e00;
+}
+.lalaland{
+width: 100%; display: flex; align-items:center; justify-content: space-evenly;flex-direction: column;
+}.item {
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.image1 { background-image: url('./photos/k.webp'); grid-column: span 3; grid-row: span 3;}
+.image2 { background-image: url('./photos/c.webp');grid-column: span 2; }
+.image3 { background-image: url('./photos/photo_2023-12-26_13-47-30.jpg'); }
+.image4 { background-image: url('../front-end_Koval/practice/IMG_2354.JPG');grid-row: span 3;grid-column: span 2;  }
+.image5 {  background-image: url('./photos/a young man with bro (8) (2).jpg');grid-column: span 2;}
+.image6 {background: linear-gradient(180deg, #0d00ff 0%, #0085FF 100%);  }
+.image7 {grid-column: span 2;
+background: linear-gradient(120deg, #3f3f3f 0%, #5d5d5d 100%);
+
+}
+.image8 {  background-image: url('./photos/a.webp');  grid-column: span 3; grid-row: span 2;}
+.image9 { background: linear-gradient(120deg, #920022 0%, #2a0000 100%); grid-column: span 2; grid-row: span 2; }
+.image10 { background-image: url('./photos/nuckchorris4631_friendly_Austrian_christmas_background_061e53cb-2e39-4116-8ae0-232d1b882445.png'); grid-column: span 4; grid-row: span 2; }
+.image11 {  background-image: url('./photos/i.webp');  grid-column: span 3; grid-row: span 2;}
+
+.image12 {  background-image: url('./photos/c.webp');  grid-column: span 3; grid-row: span 2;}
+.image13 {  background-image: url('./photos/d.webp');  grid-column: span 3; grid-row: span 2;}
+.image14 {  background-image: url('./photos/photo_2024-02-20_18-37-26.jpg');  grid-column: span 7; grid-row: span 3;}
+.image15 { background: linear-gradient(285.46deg, #05EF00 3.31%, #05383F 90.59%);
+ grid-column: span 4; grid-row: span 2;}
+ .image16 { background: linear-gradient(212.46deg, #848484 3.31%, #b24646 90.59%);
+ grid-column: span 3; grid-row: span 3;}
+
+.color1 {
+background: linear-gradient(305.46deg, #ff9900 3.31%, #7a0070 90.59%);
+grid-column: span 2;
+
+ grid-row: span 2;}
+.color2 { background-image: url(./photos/e.webp); }
+.color3 { background-image: url('../front-end_Koval/practice/IMG_2354.JPG'); grid-column: span 2; grid-row: span 1;  }
+.color4 {background-image: url(./photos/photo_2023-12-13_14-51-33.jpg); grid-row: span 2;grid-column: span 5; }
+.color5 { background: linear-gradient(#004f3e , #11bdd4 ); grid-row: span 2;grid-column: span 2;  }
+.color6 { background-color: #4a4a4a; }
+.color7 { background-color: #00e676;grid-column: span 2;  }
+.color8 { background-image: url(./photos/nuckchorris4631_friendly_Austrian_christmas_background_67ffd396-4863-4cb4-870c-659068d683c0.png); grid-column: span 3; }
+.color9 { background-color:  #11bdd4; grid-column: span 2; grid-row: span 2; }
+.color10 { background-image: url(./photos/IMG_2355.JPG);grid-column: span 3; grid-row: span 4;  }
+
+
+p{
+  font-size: 25px;
+}
+footer{
+  background-color: rgba(0, 0, 0, 0.596);
+  width: 100%;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 100px;
+  bottom: 0px;
+  z-index: 2;color: white;
+  height: 100px;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+.teammate{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40%;
+  height: 40%;
+}
+.boxl{
+  display: grid;
+grid-template-columns: repeat(8, 1fr);
+grid-gap: 10px;
+width: 90vw; grid-auto-rows: 150px; 
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  width: 95%;
+  height: 750px;
+  backdrop-filter: blur(3px);  border-radius: 20px; background-color: #252525d9; font-size: 25px;
+ 
+}
+@media screen and (max-width:1200px) {
+
+  .grid-container {
+    grid-template-columns: repeat(9, 1fr);
+    width: 90vw; grid-auto-rows: 130px; 
+
+  }
+}
+@media screen and (max-width:1000px) {
+
+
+  .grid-container {
+    grid-template-columns: repeat(7, 1fr);
+    width: 90vw; grid-auto-rows: 130px; 
+
+  }
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #2b2b2b;
+}
+
+
+@media screen and (max-width: 1200px) {
+
+
+  .grid-container {
+      grid-template-columns: repeat(7, 1fr);
+      grid-auto-rows: 130px; 
+  grid-auto-columns:130px;
+  }
+  .lol{
+    display: none;
+  }
+
+}
+.team{
+  width: 50%;
+}
+@media screen and (max-width:1000px) {
+.team{
+  width:80%;
+}
+}
+@media screen and (max-width: 1000px) {
+  .grid-container {
+      grid-template-columns: repeat(5, 1fr);
+  }
+  .boxl {
+    width: 80%;
+    margin: 10px auto;
+    padding: 20px;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+  }
+  .obmin{
+    transform: scale(0.4);
+  }
+  .last{
+    height: 250px;
+  }
+  .Christmas{
+    transform: scale(0.4);
+
+  }
+  .last:last-child{
+    margin-top: -70px;
+    margin-left: 100px;
+  }
+  .comp{
+    transform: scale(0.7);
+  }
+  p{
+    font-size: 20px;
+  }
+ 
+}
+
+@media screen and (max-width: 600px) {
+  .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 100px; 
+      grid-auto-columns:100px;
+  }
+.comp{
+  width: 300px;
+}
+  .box, .boxl {
+      width: 80%;
+      margin: 10px auto;
+      padding: 20px;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+    }
+    .boxl div:nth-child(1){display: flex;}
+
+  .prebox{
+    flex-direction: column;
+    height: fit-content;
+    width: 100% ;
+  }
+.container{
+  
+}
+  p {
+    font-size: 20px;
+  }
+  .boxl div{
+    height: 150px;
+  }.boxl{
+    height: 500px;
+  }
+  .Christmas{
+    transform: scale(0.3);
+    width: 325%;
+    height: 355%;
+  }.nav{
+    width: 100%;
+    height: 40px;
+    position: fixed;
+    top: 0px;
+
+    right: 0px;
+  
+  }.nav div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  h1{
+    font-size: 25px;
+  }
+  h3{
+    font-size: 15px;
+  }
+  h4{
+    font-size: 16px;
+  }
+  .teammate div{
+    height: 10px;
+    width: 10px;
+
+  }
+  .nav svg{transform-origin: center;
+  transform: scale(0.5);
+}
+.parrot{
+  background-image: url(./photos/i.webp);
+}
+  .obmin{
+    transform: scale(0.2);
+    align-self: flex-start;
+    justify-self: flex-end;
+    width: 450%;
+    height: 450%;
+
+  }
+  .hrich{
+    display: none;
+  }
+  footer h1{
+    text-align: center;
+  }
+}
+
+
+
+@media screen and (max-width: 400px) {
+  .lul{display: block;}
+  .lol{
+    display: block;
+  }
+  .container {
+    margin-top: 40px;
+}
+p{
+  font-size: 15px;
+}
+.last:last-child{
+  margin-top: 0px;
+  margin-left: 0px;
+}
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90vw; grid-auto-rows: 80px; 
+    margin-top: -35px;
+
+  }
+  .grid-container {
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-rows: 40px; 
+      grid-auto-columns:40px;
+  }
+
+.comp{
+  transform-origin: center;
+}
+.large:nth-child(1){
+  margin-top: 0px;
+  
+}
+.large{
+  width: 90%;
+}
+.box.large{
+  width: 70%;
+}
+.box:nth-child(2){width: 90%;
+  height: 190px;}
+
+  .container .prebox{
+    width: 100%;
+  }
+  .box{
+    width: 90%;
+    padding: 20px;
+  }
+  .box.large{
+    height: fit-content;
+
+  }
+}
+
+
+@media screen and (max-width: 350px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows:40px; 
+    grid-auto-columns:40px;
+    overflow-x: hidden;
+  }
+.box:nth-child(1){
+  width: 90%;
+}
+.prebox{
+  width: 100%;
+}
+
+}
+iframe{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+ .boxl{
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+footer svg:hover {
+  fill: #05383F;
+}
+.svg-container {
+  display: inline-block;
+  transition: filter 0.3s ease-in-out;
+}
+
+.svg-container:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))
+          drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))
+          drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+}
+
+.container{
+  width: 100%;
+}
+.grid-container{
+  overflow: hidden;
+}
+#usyk{
+  display: none; 
+  align-items: center;   backdrop-filter: blur(2px); justify-content: space-around;
+   flex-direction: column;   background-color: rgba(0, 0, 0, 0.363);  position: absolute; height: 100%;width: 100%; z-index: 5;
+}.chosen{
+  align-items: center;
+  display: flex;flex-direction: column;   
+  padding: 50px;align-items: center;
+  padding-bottom: 50px;    min-width: 50%;
+height:  max-content;
+width: max-content;display: none;
+  background-color: #d4d4d4;
+}

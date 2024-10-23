@@ -1,0 +1,348 @@
+        
+let prologue=document.getElementById('prol');
+let Schedryk23=document.getElementById('Leontovych');
+Schedryk23.volume = 0.5;prologue.volume = 1;
+let santa = document.getElementById("a2");
+let menu = document.getElementById('afkfslg');
+let divmen = document.getElementById('divmen');
+let dfs = document.getElementsByClassName('dfs');
+let divcl= document.getElementById('divcl');
+ 
+
+    menu.addEventListener("touchstart", function() {
+        divmen.style.display = 'flex';
+      
+    });
+    divcl.addEventListener("touchstart", function() {
+      divmen.style.display = 'none';
+  }); divmen.addEventListener("dblclick", function() {
+    divmen.style.display = 'none';
+});   
+ menu.addEventListener("click", function() {
+  divmen.style.display = 'flex';
+});
+divcl.addEventListener("click", function() {
+divmen.style.display = 'none';
+}); 
+santa.addEventListener('click',function(){
+  if(Schedryk23.paused){Schedryk23.play();   audio4.pause();
+    audio1.pause();
+    audio2.pause();
+    audio3.pause();
+    audio.pause(); prologue.pause();}else{
+    Schedryk23.pause();
+  }
+})
+let a1=document.getElementById('a21');
+let a2=document.getElementById('a22');
+let a3=document.getElementById('a23');
+let a4=document.getElementById('a24');
+let a5=document.getElementById('a25');
+
+
+
+document.getElementById("hg").addEventListener("dblclick", function () {
+  document.querySelector("#hg").style.display = 'none';
+  document.querySelector("#button").style.display = ' flex';
+  prologue.pause();
+});
+
+
+
+prologue.addEventListener('ended', function() {
+  prologue.currentTime = 0; // Повернення до початку аудіофайлу
+  prologue.play(); // Початок відтворення знову
+});
+document.getElementById("button").addEventListener("click", function () {
+  document.querySelector("#hg").style.display = 'flex';
+  document.querySelector("#button").style.display = 'none';    
+  prologue.play();  Schedryk23.pause(); audio4.pause();audio1.pause();
+  audio2.pause();
+  audio3.pause();
+  audio.pause();
+});
+
+//Slider
+let vol = document.getElementById("volumeSlider");
+
+function updateVolume() {
+  audio.volume = vol.value;
+  audio1.volume = vol.value;
+  audio2.volume = vol.value;
+  audio3.volume = vol.value;
+  audio4.volume = vol.value;
+}
+
+//аудіо обертання
+function getCurrentRotation(element) {
+var style = window.getComputedStyle(element, null);
+var transform = style.getPropertyValue("transform");
+var matrix = new DOMMatrixReadOnly(transform);
+return Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
+}
+
+//аудіо
+
+let audio4 = document.getElementById("myAudio4");
+let audio3 = document.getElementById("myAudio3");
+let audio2 = document.getElementById("myAudio2");
+let audio1 = document.getElementById("letItSnow");
+let audio = document.getElementById("myAudio");
+audio.volume=0.6;
+
+let rotatingElement = document.getElementsByClassName("audio")[0];
+let rotatingElement2 = document.getElementsByClassName("audio")[1];
+let rotatingElement3 = document.getElementsByClassName("audio")[2];
+let rotatingElement4 = document.getElementsByClassName("audio")[3];
+let rotatingElement5 = document.getElementsByClassName("audio")[4];
+
+
+
+function playAu(audi, rotation) {
+  if (audi.paused) {
+    prologue.pause();
+    Schedryk23.pause();
+    audi.play();
+    updateVolume();
+    rotation.style.animation = 'rotate 40s infinite';
+    audi.addEventListener('ended', function () {
+      audi.currentTime = 0;
+      audi.play();
+    });
+  } else {
+    rotation.style.transform = "rotate(" + getCurrentRotation(rotation) + "deg)";
+    rotation.style.animation="none";
+    audi.pause();
+  }
+}
+
+
+function playAudio() {
+  let currentRotation = getCurrentRotation(rotatingElement);
+  playAu(audio,rotatingElement)
+}
+function playAudio1() {
+  let currentRotation = getCurrentRotation(rotatingElement);
+  playAu(audio1,rotatingElement2)
+}
+function playAudio2() {
+  let currentRotation = getCurrentRotation(rotatingElement);
+  playAu(audio2,rotatingElement5)
+}
+function playAudio3() {
+  let currentRotation = getCurrentRotation(rotatingElement);
+  playAu(audio4,rotatingElement4)
+}
+function playAudio24() {
+  let currentRotation = getCurrentRotation(rotatingElement);
+  playAu(audio3,rotatingElement3)
+}
+
+
+
+
+
+var huh=document.getElementById("nuh");
+var elf=document.getElementsByClassName("gf");
+var audioElement1 = document.getElementById("au1");
+var audioElement = document.getElementById("au");
+var audioElement2 = document.getElementById("au2");
+var audioElement3 = document.getElementById("au3");
+var audioElement4 = document.getElementById("au4");
+
+var elo=1;
+
+function getCurrentRotation(element) {
+  var style = window.getComputedStyle(element, null);
+  var transform = style.getPropertyValue("transform");
+  if (transform === "none") return 0;
+  var matrix = new DOMMatrixReadOnly(transform);
+  return Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
+}
+//change next
+let await=true;
+
+function changeNext(changedAu,newAu,name,preAudioFile){
+  if(await){
+    await=false;
+  audio4.pause();
+  audio1.pause();
+  audio2.pause();
+  audio3.pause();
+  audio.pause();
+  document.querySelector("#zyma").style.display = 'none';
+  document.querySelector("#beg").style.display = 'none';
+  document.querySelector("#arctic").style.display = 'none';
+  document.querySelector("#artist").style.display = 'none';
+  document.querySelector("#Schedryk").style.display = 'none';
+  changedAu.style.animation="none"
+  changedAu.style.opacity = "0";
+  changedAu.style.transform = "translateX(100%)";
+  huh.style.transform = "translateX(100%)";
+  huh.style.opacity = "0";
+  changedAu.style.animation = '';
+  
+  // Clear the animation for rotatingElement2
+  newAu.style.animation = '';
+  setTimeout(function () {
+    
+    changedAu.style.display = "none";
+    preAudioFile.pause();
+    huh.style.display = "none";
+    newAu.style.display = "flex";
+    newAu.style.opacity = "1";
+    newAu.style.transform = "translateX(0)";
+    huh.style.transform = "translateX(0)";
+    huh.innerText = name;
+    huh.style.display = "flex";
+    huh.style.opacity = "1";
+    document.querySelector("#lol").style.display = 'flex';
+    await=true
+  }, 1000);
+}
+}
+
+//Change previous
+function changePre(changedAu,newAu,name,preAudioFile){
+  if(await){
+    await=false;
+  audio4.pause();
+  audio1.pause();
+  audio2.pause();
+  audio3.pause();
+  audio.pause();
+
+  changedAu.style.animation="none"
+  changedAu.style.opacity = "0";
+  changedAu.style.transform = "translateX(-100%)";
+  huh.style.transform = "translateX(-100%)";
+  huh.style.opacity = "0";
+  changedAu.style.animation = '';
+ 
+  newAu.style.animation = '';
+  setTimeout(function () {
+
+    document.querySelector("#beg").style.display = 'none';
+    document.querySelector("#arctic").style.display = 'none';
+    document.querySelector("#artist").style.display = 'none';
+    document.querySelector("#Schedryk").style.display = 'none';
+    document.querySelector("#zyma").style.display = 'none';
+
+    changedAu.style.display = "none";
+    preAudioFile.pause();
+    huh.style.display = "none";
+    newAu.style.display = "flex";
+    newAu.style.opacity = "1";
+    newAu.style.transform = "translateX(0)";
+    huh.style.transform = "translateX(0)";
+    huh.innerText = name;
+    huh.style.display = "flex";
+    huh.style.opacity = "1";
+    document.querySelector("#lol").style.display = 'flex';
+    await=true;
+}, 1000);
+
+}
+}
+
+let name4="Brenda Lee - Rockin' around the Christmas tree";
+let name2="Dean Martin - Let it snow";
+let name3="Tember Blanche — Як день посуне ніч";
+let name1="Wham - Last Christmas";
+
+let name5="Michael Bublé - It's beginning to look a lot like Christmas";
+
+
+
+
+document.getElementById("next").addEventListener("click", function () {
+  let currentRotation = getCurrentRotation(rotatingElement2);
+  let currentRotation1 = getCurrentRotation(rotatingElement);
+
+if(elo==5){
+  elo-=5;
+}
+if(audioElement4.style.display=="flex"){
+    changeNext(audioElement4,audioElement, name1, audio4);
+}
+if(audioElement.style.display=="flex"){
+    changeNext(audioElement, audioElement1, name2, audio); }
+    if(audioElement1.style.display=="flex"){
+    changeNext(audioElement1, audioElement2, name5, audio1); }
+    if(audioElement2.style.display=="flex"){
+    changeNext(audioElement2, audioElement3, name3, audio2); }
+    if(audioElement3.style.display=="flex"){
+    changeNext(audioElement3, audioElement4, name4, audio3); }
+  elo +=1;
+});
+
+
+document.getElementById("previous").addEventListener("click", function () {
+  let currentRotation = getCurrentRotation(rotatingElement2);
+  rotatingElement.style.animation = '';
+  
+  if(elo==5){
+    elo-=5;
+  }
+  if(audioElement1.style.display=="flex"){changePre(audioElement1,audioElement, name1, audio1);}    
+  if(audioElement.style.display=="flex"){changePre(audioElement, audioElement4, name4, audio);}
+  
+    if(audioElement4.style.display=="flex"){changePre(audioElement4, audioElement3, name3, audio4);}
+    if(audioElement3.style.display=="flex"){changePre(audioElement3,audioElement2, name5, audio3);}
+      
+    if(audioElement2.style.display=="flex"){changePre(audioElement2, audioElement1, name2, audio2);}
+    elo +=1; 
+})
+
+
+
+
+//additional
+let au1=document.getElementById("au");
+let au2=document.getElementById("au1");
+let au3=document.getElementById("au2");
+let au4=document.getElementById("au3");
+let au5=document.getElementById("au4");
+
+//song text
+au1.style.display="flex";
+
+document.getElementById("lol").addEventListener("click", function () {
+  if(au1.style.display=="flex"){
+  document.querySelector("#lol").style.display = 'none';
+  document.querySelector("#arctic").style.display = 'flex';}
+  else if(au2.style.display=="flex")
+  {document.querySelector("#lol").style.display = 'none';
+  document.querySelector("#artist").style.display = 'flex';}
+  else if(au3.style.display=="flex")
+  {document.querySelector("#lol").style.display = 'none';
+  document.querySelector("#beg").style.display = 'flex';}
+  else if(au4.style.display=="flex")
+  {document.querySelector("#lol").style.display = 'none';
+  document.querySelector("#zyma").style.display = 'flex';}
+  else if(au5.style.display=="flex")
+  {document.querySelector("#lol").style.display = 'none';
+  document.querySelector("#Schedryk").style.display = 'flex';}
+});
+document.getElementById("artist").addEventListener("dblclick", function () {
+  document.querySelector("#artist").style.display = 'none';
+  document.querySelector("#lol").style.display = 'flex';});
+
+
+document.getElementById("arctic").addEventListener("dblclick", function () {
+  document.querySelector("#arctic").style.display = 'none';
+  document.querySelector("#lol").style.display = 'flex';});
+
+
+document.getElementById("Schedryk").addEventListener("dblclick", function () {
+document.querySelector("#Schedryk").style.display = 'none';
+document.querySelector("#lol").style.display = 'flex';});
+document.getElementById("zyma").addEventListener("dblclick", function () {
+  document.querySelector("#zyma").style.display = 'none';
+  document.querySelector("#lol").style.display = 'flex';});
+
+  document.getElementById("beg").addEventListener("dblclick", function () {
+    document.querySelector("#beg").style.display = 'none';
+    document.querySelector("#lol").style.display = 'flex';});
+  
+  

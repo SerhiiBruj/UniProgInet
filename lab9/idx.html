@@ -43,28 +43,28 @@
           text-align: center;
         "
       >
-        <a
-          href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/playy.html"
-          style="font-size: 30px; color: rgb(51, 51, 51)"
+      <a
+      href="http://kovalfrontend.000.pe"
+        style="font-size: 30px; color: rgb(51, 51, 51)"
         >
-          1
-        </a>
-      </div>
-      <h1>Вініловий плеєр 1-ий семестр</h1>
-      <div
-        class="cc"
-        id="a2"
-        style="
+        1
+      </a>
+    </div>
+    <h1>Вініловий плеєр 1-ий семестр</h1>
+    <div
+    class="cc"
+    id="a2"
+    style="
           width: 40px;
           border-radius: 50%;
           height: 40px;
           text-decoration: underline;
           text-align: center;
           color: rgb(51, 51, 51);
-        "
+          "
       >
-        <a
-          href="http://kovalfrontend.000.pe/front-end_Koval/practice/2.0/ng.html#a4"
+      <a
+      href="./index.html"
           style="font-size: 30px; color: rgb(51, 51, 51)"
         >
           2
@@ -83,7 +83,7 @@
         "
       >
         <a
-          href="http://kovalfrontend.000.pe/Web-design_Koval/!index.html"
+          href="./f.html"
           style="font-size: 30px; color: rgb(51, 51, 51)"
         >
           3
@@ -218,34 +218,49 @@
 
     <section id="dddd" style="height: 580px">
       <h2 id="z">LOGO</h2>
-      <div id="myattempt">
+      <div id="myattempt" style="position: relative">
         <object data="./LOGO.svg" type="image/svg+xml"></object>
       </div>
     </section>
     <script>
-      let myattempt = document.getElementById("myattempt");
-      myattempt.addEventListener("click", () => {
-        console.log("555");
-        myattempt.style.transform = `none`; 
-        ballbounce(myattempt, 5000);
-      });
+    let myattempt = document.getElementById("myattempt");
 
-      const ballbounce = (el, time) => {
-        el.animate([
-          
-            { transform: "translateY(0)" },
-            { transform: `translateY(-${time/10}px)` },
-            { transform: "translateY(0)" },
-        ],{
-            duration: time,
-            easing: "cubic-bezier(0, 1, 1, 0)",
-        })
-        if (time > 100) {
-          setTimeout(() => {
-            ballbounce(el,time/2)
-          }, time );
-        }
-      };
+myattempt.addEventListener("click", () => {
+  ballbounce(myattempt, 5000, 0);
+});
+
+const ballbounce = (el, time, left) => {
+  let translateX = left + time / 50;
+  el.style.transform=`translateX(${translateX})`
+  el.animate(
+    [
+      {
+        transform: `translateY(0) translateX(${left}px)`,
+      },
+      {
+        transform: `translateY(-${(time * 1.2) / 10}px) translateX(${
+          left + translateX/2 
+        }px)`, 
+      },
+      {
+        transform: `translateY(0) translateX(+${   left + translateX}px)`, 
+      },
+    ],
+    {
+      duration: time,
+      easing: "cubic-bezier(0, 1, 1, 0)", 
+    }
+  );
+
+  if (time > 100) {
+    setTimeout(() => {
+      ballbounce(el, time / 2, translateX); 
+    }, time);
+  }else {
+    el.style.transform= `translateY(0) translateX(${left + translateX}px)`
+  }
+};
+
     </script>
   </body>
 </html>

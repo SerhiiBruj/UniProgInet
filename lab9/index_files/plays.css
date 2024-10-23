@@ -1,0 +1,171 @@
+.player {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 300px;
+    width: 400px;
+    background-color: #330404;
+    border-radius: 30px;
+    box-shadow: -20px 10px 0px 10px rgb(24, 11, 11), -25px 10px 10px 0px rgb(0, 0, 0);
+}
+.surface {
+    height: 90%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #424242;
+    border-radius: 30px;
+}
+.vinilspot {
+    height: 220px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 220px;
+    background-color: rgb(32, 32, 32);
+    border-radius: 50%;
+}
+.circ {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    background-color: #000000;
+}
+.stick {
+    height: 70%;
+    width: 30px;
+    background-color: #20253a00;
+    transform-origin: bottom;
+    transition: all 1.3s ease;
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation-delay: 2s;
+}
+.needle {
+    width: 70%;
+    height: 20px;
+    background-color: rgb(126, 126, 126);
+    border-radius: 50%;
+}
+.steeple {
+    width: 50%;
+    height: 80%;
+    background-color: rgb(63, 63, 63);
+    border-radius: 30px;
+}
+.rotatingbox {
+    width: 100%;
+    height: 50px;
+    background-color: #292929;
+    border-radius: 10px;
+}
+
+.first:active{
+    transform: none;
+}
+.conteiner{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.first {
+    transform: rotateX(60deg);
+    position: relative;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-image: linear-gradient(rgba(4, 4, 5, 1), #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: (rgba(0, 0, 0, 1), #2d2b36, #100F14);
+    transition: all 0.5s ease-out;
+    z-index: 2;
+    cursor: grab;
+}
+.second {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: #2d2b36 solid 1px;
+    height: 180px;
+    width: 180px;
+}
+.third {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: #2d2b36 solid 1px;
+    height: 140px;
+    width: 140px;
+}
+.forth {
+    display: flex;
+    clip-path: circle(50% at center);
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    background-color: #3d0007;
+    border: 1px solid rgba(128, 128, 128, 0.411);
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 600px;
+
+}
+@keyframes play{
+  from{
+    transform:rotate(-87deg);
+  }
+  95%{
+    transform:rotate(-70deg);
+  }
+  to{
+    transform:rotate(0deg);
+  }
+}
+@keyframes stop{
+   
+    to{
+      transform:rotate(0deg);
+    }
+
+}
+@keyframes disco {
+    from{
+        transform-origin:left;
+        transform: rotateY(60deg);
+    }
+    to{
+        transform: rotateX(0deg);
+  
+   
+    }
+   
+}
+@keyframes rotate
+{
+    from{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(5000deg);
+    }
+   
+}
