@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        var $text = $(".hide_text");
+        $text.hide();
+
+        $(".button").click(() => {
+          console.log("help me");
+          $text.show(200);
+        });
+
+        $(".hide_text p:first").click(function () {
+          $(this).text("Dom first");
+        });
+        $(".hide_text p:last").click(function () {
+          $(this).text("Dom last");
+        });
+
+        $("p:first").hover(
+          function () {
+            $(this).addClass("havau");
+          },
+          function () {
+            $(this).removeClass("havau");
+          }
+        );
+
+        $("p:last").hover(
+          function () {
+            $(this).addClass("nehavau");
+          },
+          function () {
+            $(this).removeClass("nehavau");
+          }
+        );
+
+        $(".22").bind("click", function () {
+          $(this).addClass("nehavau").removeClass("standart");
+        });
+        $(".22").bind("dblclick", function () {
+          $(this).addClass("standart").removeClass("nehavau");
+        });
+
+        let clickTimer;
+        $("#clickalert").bind("click", () => {
+          clearTimeout(clickTimer);
+          clickTimer = setTimeout(function () {
+            alert("click");
+          }, 300);
+        });
+        $("#clickalert").bind("dblclick", () => {
+          clearTimeout(clickTimer);
+          alert("dblclick");
+        });
+
+        const $image = $("#img"); // Змінили #image на #img
+        const $showText = $(".button"); // Змінили #showText на клас кнопки
+        const $tooltip = $("#tip"); // Змінили #tooltip на #tip
+
+        $showText.click(function () {
+          $image.show();
+          $showText.hide();
+        });
+
+        $image.click(function () {
+          $image.hide();
+          $showText.show();
+          $tooltip.hide();
+        });
+
+        $image.mouseover(function (e) {
+          $tooltip.css({
+            display: "block",
+            top: e.pageY + 10 + "px",
+            left: e.pageX + 10 + "px",
+          });
+        });
+
+        $image.mouseout(function () {
+          $tooltip.hide();
+        });
+
+        $("form").submit(function () {
+          if ($("input:first").val() == "correct") {
+            $("span").text("Перевіряєм...").show();
+            return true;
+          }
+          $("span").text("Неправильно!").show().fadeOut(1000);
+          return false;
+        });
+      });
+    </script>
+
+    <style>
+      * {
+        transition: all ease 1s;
+        box-sizing: border-box;
+      }
+      .standart {
+        color: pink;
+        background-color: yellowgreen;
+        border: dashed blue;
+        font-size: larger;
+        text-align: center;
+        padding: 50px;
+      }
+      .nehavau,
+      .havau {
+        background: rgb(45, 75, 58);
+        border: 10px solid seagreen;
+        border-radius: 10px;
+        padding: 50px;
+        color: seashell;
+      }
+      .nehavau {
+        background-color: rgb(22, 80, 80);
+      }
+      #tip {
+        display: none;
+        position: absolute; /* Для правильного позиціонування */
+      }
+    </style>
+  </head>
+  <body>
+    <button class="button">покажи</button>
+    <article
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      "
+      class="hide_text"
+    >
+      <p>А НАС ТОЧНО ПОТІМ ВІЗЬМУТЬ НА РОБОТУ?!?!?!??!</p>
+      <p>А НАС ТОЧНО ПОТІМ ВІЗЬМУТЬ НА РОБОТУ?!?!?!??!</p>
+    </article>
+    <article>
+      <div class="22 standart">
+        AAAAAAAAAAA<br />AAAAAAAAAAAA<br />AAAAAAAAAAAAAA <br />AAAAA
+      </div>
+    </article>
+
+    <article>
+      <button id="clickalert">Click on me</button>
+    </article>
+
+    <h1 id="pokaz">Pokazaty zobrazhennia</h1>
+    <img
+      id="img"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYUQrViVCEEHwJepH4YPIxQaJdL-6j-rfOzg&s"
+      alt="cat"
+    />
+    <div id="tip">Hello world</div>
+
+    <h2>Введіть в текстове поле слово 'correct'.</h2>
+
+    <form action="javascript:alert('Успішно!');">
+      <div>
+        <input type="text" />
+        <input type="submit" />
+      </div>
+    </form>
+    <span></span>
+  </body>
+</html>
