@@ -43,30 +43,27 @@
           text-align: center;
         "
       >
-      <a
-      href="http://kovalfrontend.000.pe"
-        style="font-size: 30px; color: rgb(51, 51, 51)"
+        <a
+          href="http://kovalfrontend.000.pe"
+          style="font-size: 30px; color: rgb(51, 51, 51)"
         >
-        1
-      </a>
-    </div>
-    <h1>Вініловий плеєр 1-ий семестр</h1>
-    <div
-    class="cc"
-    id="a2"
-    style="
+          1
+        </a>
+      </div>
+      <h1>Вініловий плеєр 1-ий семестр</h1>
+      <div
+        class="cc"
+        id="a2"
+        style="
           width: 40px;
           border-radius: 50%;
           height: 40px;
           text-decoration: underline;
           text-align: center;
           color: rgb(51, 51, 51);
-          "
+        "
       >
-      <a
-      href="./index.html"
-          style="font-size: 30px; color: rgb(51, 51, 51)"
-        >
+        <a href="./index.html" style="font-size: 30px; color: rgb(51, 51, 51)">
           2
         </a>
       </div>
@@ -82,10 +79,7 @@
           color: rgb(51, 51, 51);
         "
       >
-        <a
-          href="./f.html"
-          style="font-size: 30px; color: rgb(51, 51, 51)"
-        >
+        <a href="./f.html" style="font-size: 30px; color: rgb(51, 51, 51)">
           3
         </a>
       </div>
@@ -163,6 +157,17 @@
         id="textTyping"
       ></div>
     </section>
+
+    <section id="dddd" style="height: 580px">
+      <h2 id="z">LOGO</h2>
+      <h1 id="IPZ"></h1>
+      <h2 id="ddddd"></h2>
+      <div id="myattempt" style="position: relative; ">
+        <object data="./LOGO.svg" type="image/svg+xml"></object>
+        <span style="height: 100%; width: 100%;z-index: 5; position: absolute;">ІПЗ</span>
+      </div>
+      <div id="slider" style="transition: 5s all ease; position: absolute;height: 500px;width: 200px;transform: translateX(-500px); background-color: red;"></div>
+    </section>
     <script>
       let textTyping = document.getElementById("textTyping");
       const strs = [
@@ -209,58 +214,67 @@
           }
         });
       }
-
       function removeLastCharacter(element) {
         const text = element.textContent;
         element.textContent = text.slice(0, -1);
       }
-    </script>
 
-    <section id="dddd" style="height: 580px">
-      <h2 id="z">LOGO</h2>
-      <div id="myattempt" style="position: relative">
-        <object data="./LOGO.svg" type="image/svg+xml"></object>
-      </div>
-    </section>
-    <script>
-    let myattempt = document.getElementById("myattempt");
+      let IPZ = document.getElementById("IPZ");
+      let ddddd = document.getElementById("ddddd");
+      let slider = document.getElementById("slider");
 
-myattempt.addEventListener("click", () => {
-  ballbounce(myattempt, 5000, 0);
-});
+      let myattempt = document.getElementById("myattempt");
+let ddd= ["ліпший","крутіший","Самий ліпший","прекрасний","Сами лєпший","найпрекрасніший","undefined","undefined","undefined","undefined","undefined"]
+      myattempt.addEventListener("click", () => {
+        ballbounce(myattempt, 5000, 0);
+      });
+      let allow = true;
 
-const ballbounce = (el, time, left) => {
-  let translateX = left + time / 50;
-  el.style.transform=`translateX(${translateX})`
-  el.animate(
-    [
-      {
-        transform: `translateY(0) translateX(${left}px)`,
-      },
-      {
-        transform: `translateY(-${(time * 1.2) / 10}px) translateX(${
-          left + translateX/2 
-        }px)`, 
-      },
-      {
-        transform: `translateY(0) translateX(+${   left + translateX}px)`, 
-      },
-    ],
-    {
-      duration: time,
-      easing: "cubic-bezier(0, 1, 1, 0)", 
-    }
-  );
+      const ballbounce = (el, time, left) => {
+        if (allow) {
+          IPZ.innerText = "";
 
-  if (time > 100) {
-    setTimeout(() => {
-      ballbounce(el, time / 2, translateX); 
-    }, time);
-  }else {
-    el.style.transform= `translateY(0) translateX(${left + translateX}px)`
-  }
-};
+          recTypeIn(
+            IPZ,
+            "Інжунерія програмного забезпечення \n навчає програмуванню, мов чаріницькій силі".split(
+              ""
+            ),
+            0
+          );
+          allow = false;
+        }
+        let translateX = left + time / 50;
+        el.style.transform = `translateX(${translateX})`;
+        slider.style.transform="translateX(100vw)"
+        el.animate(
+          [
+            {
+              transform: ` rotateY(${left}deg) scale(1.1) `,
+            },
+            {
+              transform: `rotateY(-${left}deg)  scale(1)`,
+            },
+            {
+              transform: `rotateY(${left + translateX}deg)  scale(0.8)`,
+            },
+          ],
+          {
+            duration: time,
+            easing: "cubic-bezier(0, 1, 1, 0)",
+          }
+        );
 
+        if (time > 100) {
+          setTimeout(() => {
+            ddddd.innerText=ddd[Math.floor(Math.random()*10)]
+            ballbounce(el, time / 2, translateX);
+          }, time);
+        } else {
+          allow = true;
+          IPZ.innerText= ""
+          el.style.transform = `translateY(0) translateX(0px)`;
+        }
+      };
     </script>
   </body>
 </html>
