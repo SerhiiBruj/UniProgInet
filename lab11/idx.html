@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Method Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      #text {
+        color: blue;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="text">Hello, World!</div>
+    <img id="img" alt="snow burns"  style="max-height: 20vh;" />
+    <input type="text" id="inputField" value="Initial value" />
+    <button id="actionButton">Click Me</button>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div id="box">This is a box</div>
+    <button id="addElement">Add Element After</button>
+    <button id="removeElement">Remove Element</button>
+    <button id="checkHeight">Check Height</button>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <script>
+      $(document).ready(function () {
+        $("#actionButton").click(() => {
+          if ($("#inputField").val() !== "") {
+            $("#img").attr({
+              src: "https://cdna.artstation.com/p/assets/images/images/022/165/898/large/yriy-savickiy-tld.jpg?1574350870&dl=1",
+            });
+            $("#text")
+              .html($("#inputField").val())
+              .css({
+                height: `${Math.random() * 555}px`,
+                width: `${Math.random() * 666}px`,
+                backgroundImage:
+                  "url(https://64.media.tumblr.com/b12ea12b800b27116cffa895ea7ac2d7/tumblr_obejlczZoM1utaxego1_1280.gif)",
+                backgroundSize: "cover",
+                color: "gray",
+                backgroundColor: `rgb(${Math.random() * 100}, ${
+                  Math.random() * 100
+                }, ${Math.random() * 100})`,
+              });
+          }
+        });
+        $("#addElement").click(function () {
+          $("#box").after("<p>This paragraph was added after the box.</p>");
+        });
+
+        $("#removeElement").click(function () {
+          $("#box").remove();
+        });
+
+        $("#checkHeight").click(function () {
+          const innerHeight = $("#box").innerHeight(500);
+          const outerHeight = $("#box").outerHeight(100);
+          const outerHeightWithMargin = $("#box").outerHeight(true);
+
+          alert(
+            `Inner Height: ${innerHeight}px\n` +
+              `Outer Height (with border): ${outerHeight}px\n` +
+              `Outer Height (with margin): ${outerHeightWithMargin}px`
+          );
+        });
+       
+      });
+    </script>
+
+<ul id="list">
+  <li class="modify" >Item 1</li>
+  <li class="modify" >Item 2</li>
+  <li class="modify" >Item 3</li>
+  <li class="modify" >Item 4</li>
+  <li class="modify" >Item 5</li>
+  <li class="modify">Item 6</li>
+  <li class="modify">Item 7</li>
+  <li class="modify">Item 8</li>
+</ul>
+<button id="btn">Change Styles</button>
+
+<script>
+  $(document).ready(function () {
+    $("#btn").click(function () {
+
+      $(".modify").css({
+        color: "blue",
+        fontStyle: "italic"
+      }).append(" - modified");
+
+      $("li").filter((index) => (index + 1) % 3 === 0).css({
+        backgroundColor: "lightcoral",
+        border: "2px solid black"
+      }).append(" - modified");
+
+      $("#list li")
+        .first()
+        .css("color", "red") 
+        .end()
+        .css("font-weight", "bold"); 
+
+      $("#list li").eq(1).nextAll().css("background-color", "yellow");
+
+      $("#list li").eq(3).prevUntil("#list li:eq(1)").css("color", "green");
+
+      $("#list li").eq(2).css("font-size", "20px");
+
+      $("#list li").eq(2).prev().css("border", "2px solid black");
+    });
+  });
+</script>
+<h3>Filtered Array:</h3>
+<div id="result"></div>
+
+<script>
+  $(document).ready(function () {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    const evenNumbers = $.grep(numbers, function (number) {
+      return number % 2 === 0; 
+    });
+
+    $("#result").text("Even numbers: " + evenNumbers.join(", "));
+  });
+</script>
+
+
+  </body>
+</html>
