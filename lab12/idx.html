@@ -25,6 +25,15 @@
 
     <script>
       $(document).ready(function () {
+        $("#toggleAnimation").click(() => {
+          if (jQuery.fx.off) {
+            alert("включені");
+          } else {
+            alert("вимкнені");
+          }
+          jQuery.fx.off = !jQuery.fx.off;
+        });
+
         $("#animateBox").click(function () {
           $("#box")
             .css({ transform: "scale(1)" })
@@ -70,62 +79,86 @@
 
     <style>
       #logo {
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
         background-color: #007bff;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 16px;
-        color: white;
+        color: rgb(239, 0, 0);
+        font-size: 40px;
         font-weight: bold;
         margin: 20px auto;
         text-align: center;
+        background-image: url(../lab9/LOGO.svg);
+        background-size: cover;
+      }
+      #ff {
+        width: 200px;
+        height: 200px;
+        background-color: #007bff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgb(239, 0, 0);
+        font-size: 40px;
+        font-weight: bold;
+        margin: 20px auto;
+        text-align: center;
+        background-size: cover;
+        position: absolute;   transition: transform 1.5s ease-in-out; 
+        transform: translateX(-20vw);
       }
     </style>
-    <div id="logo">121 ІПЗ</div>
-    <button id="animateLogo">Запустити анімацію</button>
+  <div id="logo"><p>121 ІПЗ</p></div>
+  <div id="ff"><p>121 ІПЗ</p></div>
 
-    <script>
+  <button id="animateLogo">Запустити анімацію</button>
+
+  <script>
       $(document).ready(function () {
-        $("#animateLogo").click(function () {
-          $("#logo").animate(
-            {
-              width: "200px",
-              height: "200px",
-              fontSize: "24px",
-              opacity: 0.7,
-            },
-            {
-              duration: 1500,
-              easing: "swing",
-              start: function () {
-                $(this).css("background-color", "#28a745");
-              },
-              step: function (now, fx) {
-                if (fx.prop === "opacity") {
-                  $(this).css("border", "4px solid rgba(0, 0, 0, " + now + ")");
-                }
-              },
-              complete: function () {
-                $(this).animate(
+          $("#animateLogo").click(function () {
+              // Анімація для #logo
+              $("#logo").animate(
                   {
-                    width: "100px",
-                    height: "100px",
-                    fontSize: "16px",
-                    opacity: 1,
+                      width: "100px",
+                      height: "100px",
+                      fontSize: "24px",
+                      opacity: 0.7,
                   },
-                  1000,
-                  function () {
-                    $(this).css("background-color", "#007bff");
+                  {
+                      duration: 1500,
+                      easing: "swing",
+                      start: function () {
+                          $(this).css("background-color", "#28a745");
+                          $("#ff").css("transform", "translateX(20vw)");
+
+                      },
+                      step: function (now, fx) {
+                          if (fx.prop === "opacity") {
+                              $(this).css("border", "4px solid rgba(0, 0, 0, " + now + ")");
+                          }
+                      },
+                      complete: function () {
+                          $("#ff").css("transform", "translateX(200vw)");
+                          $(this).animate(
+                              {
+                                  width: "300px",
+                                  height: "300px",
+                                  fontSize: "16px",
+                                  opacity: 1,
+                              },
+                              1000,
+                              function () {
+                                  $(this).css("background-color", "#007bff");
+                              }
+                          );
+                      },
                   }
-                );
-              },
-            }
-          );
-        });
+              );
+          });
       });
-    </script>
+  </script>
   </body>
 </html>
